@@ -8,3 +8,12 @@
         }
     }
 }
+
+{
+    "languageserver":{
+        "coc-python":{
+            "command": "pyright"
+            "filetypes":["py"]
+        }
+    }
+}
