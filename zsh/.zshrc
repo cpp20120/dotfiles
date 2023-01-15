@@ -82,3 +82,24 @@ pk () {
  fi
 
 }
+
+# aliases
+alias cat='bat'
+alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
+alias cl='clear'
+alias count='find . -type f | wc -l'
+alias e='echo'
+alias gh='history|grep'
+alias nf='neofetch'
+
+__conda_setup="$('/home/cppshizoid/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/cppshizoid/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
