@@ -14,6 +14,8 @@ Plug 'jiangmiao/auto-pairs'                     " brackets
 Plug 'kien/ctrlp.vim'                           " file searching
 Plug 'tpope/vim-commentary'                     " comments
 
+"terminal
+Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
 "cpp
 Plug 'octol/vim-cpp-enhanced-highlight'
@@ -35,10 +37,15 @@ let g:cmake_default_config     = ''
 
 "rust
 Plug 'rust-lang/rust.vim'
+Plug 'simrat39/rust-tools.nvim'
 
 "golang
 Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled = 1
+
+"python
+Plug 'numirias/semshi'
+Plug 'davidhalter/jedi-vim'
 
 "csharp
 Plug 'OmniSharp/omnisharp-vim'
@@ -46,11 +53,37 @@ Plug 'OmniSharp/omnisharp-vim'
 "fsharp
 Plug 'ionide/ionide-vim'
 
+"java
+Plug 'artur-shaik/vim-javacomplete2'
+
+"SQL
+Plug 'nanotee/sqls.nvim'
+
 "git
 Plug 'airblade/vim-gitgutter' " shows diffs
 
 "eh?
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
+"JS/JSX/TS/TSX
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'maxmellon/vim-jsx-pretty'
+" TS 
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'jose-elias-alvarez/nvim-lsp-ts-utils'
+Plug 'nvim-lua/plenary.nvim'
+
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'npm install --frozen-lockfile --production',
+  \ 'for': ['javascript', 'typescript', 'typescriptreact', 'javascriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html'] }
+
+" Automatically format frontend files with prettier after file save
+let g:prettier#autoformat = 1
+let g:prettier#autoformat_require_pragma = 0
+
+" Disable quickfix window for prettier
+let g:prettier#quickfix_enabled = 0
 
 
 "colorschemes
@@ -88,7 +121,14 @@ set termguicolors
 nnoremap <C-t> :NvimTreeOpen<CR>
 nmap <F8> :TagbarToggle<CR>
 
+"toogleterm
+" set
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
 
+" 2<C-t> will open terminal 2
+nnoremap <silent><c-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><c-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>
 
 "functions
 function! IsHexColorLight(color) abort
@@ -118,3 +158,4 @@ if bufexists(1)
     endfor
 endif
 endfunction
+
