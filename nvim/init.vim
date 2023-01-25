@@ -84,6 +84,15 @@ Plug 'nanotee/sqls.nvim'
 "git
 Plug 'airblade/vim-gitgutter' " shows diffs
 
+"shell check
+Plug 'itspriddle/vim-shellcheck'
+
+"fzf
+Plug 'junegunn/fzf.vim'
+
+"live server
+Plug 'manzeloth/live-server'
+
 "eh?
 Plug 'Shougo/vimproc.vim', {'do': 'make'}
 "JS/JSX/TS/TSX
