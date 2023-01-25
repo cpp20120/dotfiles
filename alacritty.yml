@@ -1,0 +1,13 @@
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
+
+window.opacity: 0.90
+
+import:
+  - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+
+key_bindings:
+  - { key: V, mods: Control, action: Paste}
+  - { key: C, mods: Control, action: Copy }
+
+
