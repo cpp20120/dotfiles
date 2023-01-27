@@ -90,6 +90,7 @@ eval "$(zoxide init zsh)"
 
 # aliases
 alias cat='bat'
+alias du='dust'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
 alias cl='clear'
 alias count='find . -type f | wc -l'
