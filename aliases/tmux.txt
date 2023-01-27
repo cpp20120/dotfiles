@@ -1,0 +1,2 @@
+alias tmuxl='tmux list-sessions'
+alias tmuxa='tmux attach'
