@@ -17,7 +17,9 @@ HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(git
 	zsh-autosuggestions
-    znap
+    	znap
+	web-search
+	zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
