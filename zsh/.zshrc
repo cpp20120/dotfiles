@@ -85,6 +85,9 @@ pk () {
 
 }
 
+#zoxide
+eval "$(zoxide init zsh)"
+
 # aliases
 alias cat='bat'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
