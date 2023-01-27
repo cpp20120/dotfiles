@@ -89,6 +89,8 @@ pk () {
 eval "$(zoxide init zsh)"
 
 # aliases
+alias zshconfig="nvim ~/.zshrc"
+alias ohmyzsh='nvim ~/.oh-my-zsh'
 alias cat='bat'
 alias du='dust'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
