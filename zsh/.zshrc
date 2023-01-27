@@ -96,6 +96,14 @@ alias count='find . -type f | wc -l'
 alias e='echo'
 alias gh='history|grep'
 alias nf='neofetch'
+alias nv='nvim'
+alias v='vim'
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias to=". gotodir"
 
 __conda_setup="$('/home/cppshizoid/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
