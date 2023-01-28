@@ -32,6 +32,12 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 source ~/Git/zsh-snap/snap.zsh #Znap start
  
+local FOUND_ATUIN=$+commands[atuin]
+
+if [[ $FOUND_ATUIN -eq 1 ]]; then
+  source <(atuin init zsh)
+fi
+ 
 znap prompt sindresorhus/pure
 
 #auto dowmload and start
