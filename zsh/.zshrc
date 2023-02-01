@@ -113,7 +113,7 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
-
+#exa aliases
 if hash exa 2>/dev/null; then
     alias ls='exa'
     alias l='exa -l --all --group-directories-first --git'
