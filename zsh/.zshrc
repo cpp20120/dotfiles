@@ -22,16 +22,16 @@ plugins=(git
 	zsh-history-substring-search
 )
 
-source $ZSH/oh-my-zsh.sh
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.oh-my-zsh/oh-my-zsh.sh
+source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
+source ~/.oh-my-zsh/plugins/zsh-completions.plugin.zsh
+source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.oh-my-zsh/plugins/zsh-autocomplete
+
 # User configuration
-#Znap
-[[ -f ~/Git/zsh-snap/znap.zsh]] ||
-    git clone --depth 1 == \
-        https://github.com/marlonrichert/zsh-snap.git ~Git/zsh-snap
 
-source ~/Git/zsh-snap/snap.zsh #Znap start
-
+#atuin
 local FOUND_ATUIN=$+commands[atuin]
 
 if [[ $FOUND_ATUIN -eq 1 ]]; then
@@ -47,11 +47,30 @@ _comp_options+=(globdots)
 
 znap prompt sindresorhus/pure
 
-#auto dowmload and start
-znap source marlonrichert/zsh-autocomplete
-znap source zsh-users/zsh-autosuggestions
-znap source zsh-users/zsh-syntax-highlighting
 
+autoload -Uz add-zsh-hook
+
+DIRSTACKFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dirs"
+if [[ -f "$DIRSTACKFILE" ]] && (( ${#dirstack} == 0 )); then
+	dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
+	[[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
+fi
+chpwd_dirstack() {
+	print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
+}
+add-zsh-hook -Uz chpwd chpwd_dirstack
+
+DIRSTACKSIZE='20'
+
+setopt correctall
+
+setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
+
+## Remove duplicate entries
+setopt PUSHD_IGNORE_DUPS
+
+## This reverts the +/- operators.
+setopt PUSHD_MINUS
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
