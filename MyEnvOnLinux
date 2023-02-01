@@ -1,0 +1,37 @@
+OS:
+Manjaro
+
+DE:
+KDE Plasma
+
+Terminal Emulator:
+Alacritty
+
+Main Text Editor:
+Neovim
+
+Files:
+Ranger(TUI)
+Thunar(GUI)
+
+Shell:
+Zsh + ohmyzsh
+
+Terminal multiplexsor:
+Tmux
+
+TUI utilites:
+fzf
+bat
+iftop
+iptraf
+btm(bottom)
+btop
+htop
+ripgrep
+dust
+exa
+procs
+atuin
+gitui
+
