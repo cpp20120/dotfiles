@@ -31,13 +31,20 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
         https://github.com/marlonrichert/zsh-snap.git ~Git/zsh-snap
 
 source ~/Git/zsh-snap/snap.zsh #Znap start
- 
+
 local FOUND_ATUIN=$+commands[atuin]
 
 if [[ $FOUND_ATUIN -eq 1 ]]; then
   source <(atuin init zsh)
 fi
- 
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)	
+
 znap prompt sindresorhus/pure
 
 #auto dowmload and start
@@ -139,3 +146,6 @@ else
     fi
 fi
 unset __conda_setup
+
+# Load syntax highlighting; 
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
