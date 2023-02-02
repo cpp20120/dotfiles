@@ -20,6 +20,9 @@ Zsh + ohmyzsh
 Terminal multiplexsor:
 Tmux
 
+Mail Client:
+Mutt
+
 TUI utilites:
 fzf
 bat
