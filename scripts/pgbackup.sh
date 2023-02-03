@@ -1,4 +1,4 @@
-!/bin/sh
+#!/bin/sh
 # sql_to_csv.sh
 
 BACKUP_HOME='/opt/backup'
