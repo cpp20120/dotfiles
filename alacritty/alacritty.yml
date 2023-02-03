@@ -10,4 +10,7 @@ key_bindings:
   - { key: V, mods: Control, action: Paste}
   - { key: C, mods: Control, action: Copy }
 
-
+shell:
+  program: /bin/zsh
+  args:
+    - --login
