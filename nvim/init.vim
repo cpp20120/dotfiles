@@ -17,6 +17,9 @@ Plug 'tpope/vim-commentary'                     " comments
 "terminal
 Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
 
+"auto save
+Plug 'Pocco81/auto-save.nvim'
+
 "lazy lsp
 Plug 'dundalek/lazy-lsp.nvim'
 
