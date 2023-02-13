@@ -15,7 +15,7 @@ Ranger(TUI)
 Thunar(GUI)
 
 Shell:
-Zsh + ohmyzsh
+Zsh + ohmyzsh (try starship)
 
 Terminal multiplexsor:
 Tmux
