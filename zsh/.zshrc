@@ -1,9 +1,17 @@
+typeset -g POWERLEVEL10K_INSTANT_PROMPT=quiet
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# Basic auto/tab complete:
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)               # Include hidden files.
 
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
@@ -18,62 +26,37 @@ HIST_STAMPS="mm/dd/yyyy"
 plugins=(git
 	zsh-autosuggestions
     	znap
-	web-search
-	zsh-history-substring-search
+    	web-search
+    	zsh-history-substring-search
+    	poetry
 )
 
-source ~/.oh-my-zsh/oh-my-zsh.sh
-source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting.zsh
-source ~/.oh-my-zsh/plugins/history-substring-search/history-substring-search.zsh
-source ~/.oh-my-zsh/plugins/zsh-completions.plugin.zsh
-source ~/.oh-my-zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.oh-my-zsh/plugins/zsh-autocomplete
-
-# User configuration
-
-#atuin
-local FOUND_ATUIN=$+commands[atuin]
-
-if [[ $FOUND_ATUIN -eq 1 ]]; then
-  source <(atuin init zsh)
-fi
-
-# Basic auto/tab complete:
-autoload -U compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots)	
-
-znap prompt sindresorhus/pure
-
-
-autoload -Uz add-zsh-hook
-
-DIRSTACKFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dirs"
-if [[ -f "$DIRSTACKFILE" ]] && (( ${#dirstack} == 0 )); then
-	dirstack=("${(@f)"$(< "$DIRSTACKFILE")"}")
-	[[ -d "${dirstack[1]}" ]] && cd -- "${dirstack[1]}"
-fi
-chpwd_dirstack() {
-	print -l -- "$PWD" "${(u)dirstack[@]}" > "$DIRSTACKFILE"
-}
-add-zsh-hook -Uz chpwd chpwd_dirstack
-
-DIRSTACKSIZE='20'
-
-setopt correctall
-
-setopt AUTO_PUSHD PUSHD_SILENT PUSHD_TO_HOME
-
-## Remove duplicate entries
-setopt PUSHD_IGNORE_DUPS
-
-## This reverts the +/- operators.
-setopt PUSHD_MINUS
+source $ZSH/oh-my-zsh.sh
+source ~/.config/zsh/git/git.plugin.zsh
+source ~/.config/zsh/zsh-autocomplete/zsh-autocomplete.zsh
+source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh/zsh-history-enquirer/zsh-history-enquirer-plugin.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+fpath+=~/.zfunc
+
+ DISABLE_MAGIC_FUNCTIONS="true"
+ ENABLE_CORRECTION="true"
+ COMPLETION_WAITING_DOTS="true"
+ HIST_STAMPS="mm/dd/yyyy"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='vim'
+ else
+   export EDITOR='mvim'
+ fi
 
 #extract archives
 extract () {
@@ -114,15 +97,14 @@ pk () {
  else
  echo "'$1' is not a valid file"
  fi
-
 }
 
 #zoxide
 eval "$(zoxide init zsh)"
 
-# aliases
-alias zshconfig="nvim ~/.zshrc"
-alias ohmyzsh='nvim ~/.oh-my-zsh'
+#aliases
+alias zshconfig="mate ~/.zshrc"
+alias ohmyzsh="mate ~/.oh-my-zsh"
 alias cat='bat'
 alias du='dust'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
@@ -139,21 +121,6 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
-#exa aliases
-if hash exa 2>/dev/null; then
-    alias ls='exa'
-    alias l='exa -l --all --group-directories-first --git'
-    alias ll='exa -l --all --all --group-directories-first --git'
-    alias lt='exa -T --git-ignore --level=2 --group-directories-first'
-    alias llt='exa -lT --git-ignore --level=2 --group-directories-first'
-    alias lT='exa -T --git-ignore --level=4 --group-directories-first'
-else
-    alias l='ls -lah'
-    alias ll='ls -alF'
-    alias la='ls -A'
-fi
-
-
 __conda_setup="$('/home/cppshizoid/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
@@ -166,5 +133,8 @@ else
 fi
 unset __conda_setup
 
-# Load syntax highlighting; 
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
+nf
+
+export PATH="~/.cargo/bin/erdtree"
+
+eval "$(starship init zsh)"
