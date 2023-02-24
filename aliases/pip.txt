@@ -1,1 +1,1 @@
-pipi='pip isntall'
+pipi='pip install'
