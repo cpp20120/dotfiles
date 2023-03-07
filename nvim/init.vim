@@ -149,7 +149,7 @@ set shell=/usr/bin/zsh
 set shellcmdflag=-ic
 
 "tab
-set expandtab   
+set expandtab
 set tabstop=4
 set shiftwidth=4
 
