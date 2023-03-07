@@ -2,11 +2,15 @@ call plug#begin()
 
 "ui
 Plug 'vim-airline/vim-airline' " status bar
+Plug 'vim-airline/vim-airline-themes'
 
 "navigation
 Plug 'preservim/tagbar'             " tags
 Plug 'kyazdani42/nvim-tree.lua'     " files tree
 Plug 'kyazdani42/nvim-web-devicons' " icons
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim' "telescope
+Plug 'nvim-telescope/telescope-fzf-native.nvim', {'do':'make'}
 
 "code
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " lang server
@@ -121,9 +125,12 @@ let g:prettier#quickfix_enabled = 0
 
 
 "colorschemes
-Plug 'tyrannicaltoucan/vim-deep-space'
-let g:deepspace_italics=1
-let g:airline_theme='deep_space'
+#Plug 'tyrannicaltoucan/vim-deep-space'
+#let g:deepspace_italics=1
+#let g:airline_theme='deep_space'
+
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
 
 call plug#end()
 
@@ -147,13 +154,26 @@ set tabstop=4
 set shiftwidth=4
 
 "colors
-colorscheme deep-space
+colorscheme catppuccin-mocha
 set background=dark
 set termguicolors
 
 "shorcuts
 nnoremap <C-t> :NvimTreeOpen<CR>
 nmap <F8> :TagbarToggle<CR>
+
+"telescope
+" Find files using Telescope command-line sugar.
+nnoremap <leader>,ff <cmd>Telescope find_files<cr>
+nnoremap <leader>,fg <cmd>Telescope live_grep<cr>
+" next tab
+nnoremap H gT
+nnoremap L gt
+
+lua <<EOF
+require('telescope').load_extension('fzf')
+EOF
+
 
 "toogleterm
 " set
