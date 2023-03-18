@@ -24,7 +24,7 @@ ENABLE_CORRECTION="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(git
-	zsh-autosuggestions
+    	zsh-autosuggestions
     	znap
     	web-search
     	zsh-history-substring-search
@@ -37,6 +37,7 @@ source ~/.config/zsh/zsh-autocomplete/zsh-autocomplete.zsh
 source ~/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-history-enquirer/zsh-history-enquirer-plugin.zsh
+source ~/.config/zsh/zsh-history-substring-search.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -55,7 +56,7 @@ fpath+=~/.zfunc
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
  else
-   export EDITOR='mvim'
+   export EDITOR='nvim'
  fi
 
 #extract archives
@@ -101,6 +102,78 @@ pk () {
 
 #zoxide
 eval "$(zoxide init zsh)"
+# ZSH
+# Make all kubectl completion fzf
+command -v fzf >/dev/null 2>&1 && { 
+	source <(kubectl completion zsh | sed 's#${requestComp} 2>/dev/null#${requestComp} 2>/dev/null | head -n -1 | fzf  --multi=0 #g')
+}
+
+# CLR=$(for i in {0..7}; do echo "tput setaf $i"; done)
+BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4); 
+MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);    
+
+AWK_VAR="awk -v BLK=${BLK} -v RED=${RED} -v GRN=${GRN} -v YLW=${YLW} -v BLU=${BLU} -v MGN=${MGN} -v CYN=${CYN} -v WHT=${WHT} -v BLD=${BLD} -v RST=${RST}"
+
+# Searches only from flathub repository
+fzf-flatpak-install-widget() {
+  flatpak remote-ls flathub --cached --columns=app,name,description \
+  | awk -v cyn=$(tput setaf 6) -v blu=$(tput setaf 4) -v bld=$(tput bold) -v res=$(tput sgr0) \
+  '{
+    app_info=""; 
+    for(i=2;i<=NF;i++){
+      app_info=cyn app_info" "$i 
+    };
+    print blu bld $2" -" res app_info "|" $1
+    }' \
+  | column -t -s "|" -R 3 \
+  | fzf \
+    --ansi \
+    --with-nth=1.. \
+    --prompt="Install > " \
+    --preview-window "nohidden,40%,<50(down,50%,border-rounded)" \
+    --preview "flatpak --system remote-info flathub {-1} | $AWK_VAR -F\":\" '{print YLW BLD \$1 RST WHT \$2}'" \
+    --bind "enter:execute(flatpak install flathub {-1})" # when pressed enter it doesnt showing the key pressed but it is reading the input
+  zle reset-prompt
+}
+
+bindkey '^[f^[i' fzf-flatpak-install-widget #alt-f + alt-i
+zle -N fzf-flatpak-install-widget
+
+fzf-flatpak-uninstall-widget() {
+  touch /tmp/uns
+  flatpak list --columns=application,name \
+  | awk -v cyn=$(tput setaf 6) -v blu=$(tput setaf 4) -v bld=$(tput bold) -v res=$(tput sgr0)  \
+  '{
+    app_id="";
+    for(i=2;i<=NF;i++){
+      app_id" "$i
+    };
+    print bld cyn $2 " - " res blu $1
+   }' \
+  | column -t \
+  | fzf \
+    --ansi \
+    --with-nth=1.. \
+    --prompt="  Uninstall > " \
+    --header="M-u: Uninstall | M-r: Run" \
+    --header-first \
+    --preview-window "nohidden,50%,<50(up,50%,border-rounded)" \
+    --preview  "flatpak info {3} | $AWK_VAR -F\":\" '{print RED BLD  \$1 RST \$2}'" \
+    --bind "alt-r:change-prompt(Run > )+execute-silent(touch /tmp/run && rm -r /tmp/uns)" \
+    --bind "alt-u:change-prompt(Uninstall > )+execute-silent(touch /tmp/uns && rm -r /tmp/run)" \
+    --bind "enter:execute(
+    if [ -f /tmp/uns ]; then 
+      flatpak uninstall {3}; 
+    elif [ -f /tmp/run ]; then
+      flatpak run {3}; 
+    fi
+    )" # same as the install one but when pressed  entered the message is something like this 
+# "Proceed with these changes to the system installation? [Y/n]:" but it will uninstall the selected app weird but idk y
+  rm -f /tmp/{uns,run} &> /dev/null
+  zle reset-prompt
+}
+bindkey '^[f^[u' fzf-flatpak-uninstall-widget #alt-f + alt-u
+zle -N fzf-flatpak-uninstall-widget
 
 #aliases
 alias zshconfig="mate ~/.zshrc"
@@ -133,8 +206,67 @@ else
 fi
 unset __conda_setup
 
+echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc
+echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc
+echo 'eval "$(pyenv init -)"' >> ~/.zshrc
+
 nf
 
 export PATH="~/.cargo/bin/erdtree"
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+# Source this in your ~/.zshrc
+autoload -U add-zsh-hook
+
+export ATUIN_SESSION=$(atuin uuid)
+export ATUIN_HISTORY="atuin history list"
+
+#_atuin_preexec(){
+#	local id; id=$(atuin history start -- "$1")
+#	export ATUIN_HISTORY_ID="$id"
+#}
+
+_atuin_precmd(){
+	local EXIT="$?"
+
+	[[ -z "${ATUIN_HISTORY_ID}" ]] && return
+
+
+	(RUST_LOG=error atuin history end --exit $EXIT -- $ATUIN_HISTORY_ID &) > /dev/null 2>&1
+}
+
+_atuin_search(){
+	emulate -L zsh
+	zle -I
+
+	# Switch to cursor mode, then back to application
+	echoti rmkx
+	# swap stderr and stdout, so that the tui stuff works
+	output=$(RUST_LOG=error atuin search -i -- $BUFFER 3>&1 1>&2 2>&3)
+	echoti smkx
+
+	if [[ -n $output ]] ; then
+		RBUFFER=""
+		LBUFFER=$output
+	fi
+
+	zle reset-prompt
+}
+
+add-zsh-hook preexec _atuin_preexec
+add-zsh-hook precmd _atuin_precmd
+
+zle -N _atuin_search_widget _atuin_search
+
+if [[ -z $ATUIN_NOBIND ]]; then
+	bindkey '^r' _atuin_search_widget
+
+	# depends on terminal mode
+	bindkey '^[[A' _atuin_search_widget
+	bindkey '^[OA' _atuin_search_widget
+fi
 
 eval "$(starship init zsh)"
