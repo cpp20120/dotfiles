@@ -24,10 +24,8 @@ ENABLE_CORRECTION="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 plugins=(git
-    	zsh-autosuggestions
     	znap
     	web-search
-    	zsh-history-substring-search
     	poetry
 )
 
