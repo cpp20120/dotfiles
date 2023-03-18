@@ -1,0 +1,8 @@
+alias cc='conan cache'
+alias ccfg='conan config'
+alias cg='conan graph'
+alias ci='conan install'
+alias clt='conan list'
+alias clk='conan lock'
+alias cr='conan remove'
+alias cs='conan search'
