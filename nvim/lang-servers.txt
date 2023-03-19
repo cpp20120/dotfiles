@@ -1,0 +1,9 @@
+coc-clangd
+coc-cmake
+coc-omisharp
+coc-pyright
+coc-json
+coc-java
+coc-rust-analyzer
+coc-go
+coc-tsserver
