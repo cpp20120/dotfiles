@@ -1,6 +1,6 @@
 coc-clangd
 coc-cmake
-coc-omisharp
+coc-omnisharp
 coc-pyright
 coc-json
 coc-java
