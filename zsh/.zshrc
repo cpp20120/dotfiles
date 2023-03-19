@@ -174,8 +174,8 @@ bindkey '^[f^[u' fzf-flatpak-uninstall-widget #alt-f + alt-u
 zle -N fzf-flatpak-uninstall-widget
 
 #aliases
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconfig="nvim ~/.zshrc"
+alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cat='bat'
 alias du='dust'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
