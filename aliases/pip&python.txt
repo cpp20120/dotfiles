@@ -5,10 +5,10 @@ alias p="python $1"
 alias pi="pipenv install $1" 
 alias ps="pipenv shell"
 
-"Flask
+#Flask
 alias fr="flask run" # start a flask app
 
-"Django
+#Django
 alias rs="python manage.py runserver" # starts django server
 alias dmm="python manage.py makemigrations" # makes db migrations in django
 alias dm="python manage.py migrate" # migrates db in django
