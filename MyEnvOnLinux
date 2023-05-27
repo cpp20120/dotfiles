@@ -5,7 +5,7 @@ DE:
 KDE Plasma
 
 Terminal Emulator:
-Alacritty
+Kitty
 
 Main Text Editor:
 Neovim
@@ -15,10 +15,10 @@ Ranger(TUI)
 Thunar(GUI)
 
 Shell:
-Zsh + ohmyzsh (try starship)
+Zsh + ohmyzsh(plugins:git zsh-autocomplete zsh-autosuggestions zsh-sytax-highlighting), theme:powerlevel10k, 
 
 Terminal multiplexsor:
-Tmux
+Zellij
 
 Mail Client:
 Mutt
