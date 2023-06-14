@@ -1,0 +1,1 @@
+fd '\.{file_type}' | sad '{word}' --pager 'delta -s'
