@@ -10,6 +10,32 @@ Kitty
 Main Text Editor:
 Neovim
 
+C/C++:
+Nvim
+Clang + lld
+ClangD
+Clang-format
+LLDB
+
+Rust:
+Nvim
+Cargo
+Rust-analyzer
+rustfmt
+LLDB
+
+Java:
+Intellij IDEA
+
+C#:
+Rider
+
+Python:
+Nvim
+pyright
+pylint
+Flake8
+
 Files:
 Ranger(TUI)
 Thunar(GUI)
