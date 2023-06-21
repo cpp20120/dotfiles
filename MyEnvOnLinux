@@ -16,6 +16,7 @@ Clang + lld
 ClangD
 Clang-format
 LLDB
+Cmake+Ninja+Conan
 
 Rust:
 Nvim
@@ -26,15 +27,19 @@ LLDB
 
 Java:
 Intellij IDEA
+OpenJDK+Maven
 
 C#:
 Rider
+.NET SDK 7
+.NET Runtime 7
 
 Python:
 Nvim
 pyright
 pylint
 Flake8
+Poetry
 
 Files:
 Ranger(TUI)
