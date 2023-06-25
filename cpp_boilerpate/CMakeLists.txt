@@ -9,8 +9,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 find_package(package_name CONFIG REQUIRED)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-file(GLOB src "src/*.cpp")
+# include headers and source files
+include_directories("${PROJECT_SOURCE_DIR}/include")
+FILE(GLOB CPP_SOURCES "src/*.cpp")
 
 #for single file
 add_executable(${CMAKE_PROJECT_NAME} src/FILENAME.cpp)
+
+# add code files
+add_executable(${CMAKE_PROJECT_NAME} ${H_HEADERS} ${CPP_SOURCES})
