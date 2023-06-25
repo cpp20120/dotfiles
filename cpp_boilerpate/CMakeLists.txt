@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 20)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+if (DOCS)
+    add_subdirectory(docs)
+endif()
+
 find_package(package_name CONFIG REQUIRED)
 
 # include headers and source files
