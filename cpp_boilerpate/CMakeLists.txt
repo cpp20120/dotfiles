@@ -5,10 +5,10 @@ project(${CMAKE_PROJECT_NAME} CXX)
 set(CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 20)
 
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON) #for vscode and nvim
 set (VCPKG_HOME "$ENV{HOME}/vcpkg")
 set (CMAKE_TOOLCHAIN_FILE "${VCPKG_HOME}/scripts/buildsystems/vcpkg.cmake")
-
+#doxygen
 if (DOCS)
     add_subdirectory(docs)
 endif()
