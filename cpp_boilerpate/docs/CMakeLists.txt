@@ -3,7 +3,7 @@ find_package(Doxygen REQUIRED)
 set(DOXYGEN_INPUT_DIR  ${PROJECT_SOURCE_DIR}/include)
 set(DOXYGEN_OUTPUT_DIR ${CMAKE_CURRENT_BINARY_DIR}/docs/doxygen)
 set(DOXYGEN_INDEX_FILE ${CMAKE_CURRENT_SOURCE_DIR}/html/index.html)
-set(DOXYFILE_IN        ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in)
+set(DOXYFILE_IN        ${CMAKE_CURRENT_SOURCE_DIR}/CMakeDoxyfile.in)
 set(DOXYFILE_OUT       ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
 
 configure_file(${DOXYFILE_IN} ${DOXYFILE_OUT} @ONLY)
