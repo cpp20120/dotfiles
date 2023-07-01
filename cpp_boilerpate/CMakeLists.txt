@@ -30,22 +30,22 @@ add_executable(${CMAKE_PROJECT_NAME} ${H_HEADERS} ${CPP_SOURCES})
 #examples for graphics project
 
 find_package(imgui CONFIG REQUIRED)
-target_link_libraries(Engine PRIVATE imgui)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE imgui)
 
 find_package(glfw3 CONFIG REQUIRED)
-target_link_libraries(Engine PRIVATE glfw)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glfw)
 
 find_package(glm CONFIG REQUIRED)
-target_link_libraries(Engine PRIVATE glm)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glm)
 
 find_package(Vulkan REQUIRED)
-target_link_libraries(Engine PRIVATE Vulkan::Vulkan)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Vulkan::Vulkan)
 
 find_package(fmt CONFIG REQUIRED)
-target_link_libraries(Engine PRIVATE fmt::fmt)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE fmt::fmt)
 
 find_package(GTest CONFIG REQUIRED)
-target_link_libraries(Engine PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
 
 ############## Build SHADERS #######################
 find_program(GLSL_VALIDATOR glslangValidator HINTS 
