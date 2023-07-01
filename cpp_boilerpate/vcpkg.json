@@ -3,5 +3,9 @@
     "doxygen",
     "fmt",
     "gtest",
+    "glfw3", 
+    "glm", 
+    "vulkan", 
+    "imgui"
   ]
 }
