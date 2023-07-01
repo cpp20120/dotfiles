@@ -1,3 +1,4 @@
+```sh
 .
 ├── docs
 │   └── CMakeLists.txt
@@ -10,3 +11,4 @@
 ├── vcpkg.json
 ├── LICENSE
 └── README.md
+```
