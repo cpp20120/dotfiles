@@ -23,6 +23,26 @@ add_executable(${CMAKE_PROJECT_NAME} src/FILENAME.cpp)
 # add code files
 add_executable(${CMAKE_PROJECT_NAME} ${H_HEADERS} ${CPP_SOURCES})
 
+# add libs
+#1)find_package(package_name CONFIG REQUIRED)
+#2)target_link_libraries($PROJECT_NAME PRIVATE package_name)
 
-find_package(package_name CONFIG REQUIRED)
-target_link_libraries($PROJECT_NAME PRIVATE package_name)
+#examples for graphics project
+
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(Engine PRIVATE imgui)
+
+find_package(glfw3 CONFIG REQUIRED)
+target_link_libraries(Engine PRIVATE glfw)
+
+find_package(glm CONFIG REQUIRED)
+target_link_libraries(Engine PRIVATE glm)
+
+find_package(Vulkan REQUIRED)
+target_link_libraries(Engine PRIVATE Vulkan::Vulkan)
+
+find_package(fmt CONFIG REQUIRED)
+target_link_libraries(Engine PRIVATE fmt::fmt)
+
+find_package(GTest CONFIG REQUIRED)
+target_link_libraries(Engine PRIVATE GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
