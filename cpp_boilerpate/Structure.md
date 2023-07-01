@@ -11,7 +11,7 @@
 ├── .clang-format
 ├── .gitignore
 ├── CMakeLists.txt
-├── compile_commands.json(for clangd in nvim/vsc)
+├── compile_commands.json -> build/compile_commands.json(for clangd in nvim/vsc)
 ├── vcpkg.json
 ├── LICENSE
 └── README.md
