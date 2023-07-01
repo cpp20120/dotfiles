@@ -4,7 +4,7 @@
 │   └── CMakeLists.txt
 ├── include
 │   └── *.hpp
-|── shaders(for graphics project)
+│── shaders(for graphics project)
 │   └── *.frag/.vert
 ├── src
 │   └── *.cpp
