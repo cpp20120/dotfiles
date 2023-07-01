@@ -3,11 +3,11 @@
 ├── docs
 │   └── CMakeLists.txt
 ├── include
-|   └── *.hpp
+│   └── *.hpp
 |── shaders(for graphics project)
-|   └── *.frag/.vert
+│   └── *.frag/.vert
 ├── src
-|   └── *.cpp
+│   └── *.cpp
 ├── .clang-format
 ├── .gitignore
 ├── CMakeLists.txt
