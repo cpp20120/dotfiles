@@ -11,12 +11,12 @@ Main Text Editor:
 Neovim
 
 C/C++:
-Nvim
+Nvim/Clion
 Clang + lld
 ClangD
 Clang-format
 LLDB
-Cmake+Ninja+Conan
+Cmake+Ninja+Vcpkg
 
 Rust:
 Nvim
@@ -41,6 +41,20 @@ pylint
 Flake8
 Poetry
 
+Other:
+Postrgres, PGAdmin
+Docker
+Postman
+
+Devops(need to learn):
+Nginx
+Grafana
+Prometheus/Zabbix
+Kubernetes
+Terraform
+Ansinble
+Jenkins
+
 Files:
 Ranger(TUI)
 Thunar(GUI)
@@ -53,6 +67,7 @@ Zellij
 
 Mail Client:
 Mutt
+KMail
 
 TUI utilites:
 fzf
