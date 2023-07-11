@@ -48,11 +48,12 @@ Postman
 
 Devops tools(need to learn):
 Linux Administration
-Nginx, Envoy
+Nginx, Envoy, Traefik
 Grafana
 Prometheus/Zabbix
 Kubernetes
 Terraform
+Consul
 Ansinble
 Jenkins
 Kafka
