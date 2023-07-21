@@ -17,6 +17,7 @@ ClangD
 Clang-format
 LLDB
 Cmake+Ninja+Vcpkg
+glslc
 
 Rust:
 Nvim
