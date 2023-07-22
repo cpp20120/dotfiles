@@ -265,6 +265,9 @@ zinit light-mode for \
 #vcpkg
 export VCPKG_ROOT=/usr/bin/vcpkg
 
+#ninja
+export CMAKE_GENERATOR=Ninja
+
 #gradle
 export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
 
