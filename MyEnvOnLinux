@@ -66,7 +66,7 @@ Ranger(TUI)
 Thunar(GUI)
 
 Shell:
-Zsh + ohmyzsh(plugins:git zsh-autocomplete zsh-autosuggestions zsh-sytax-highlighting), theme:powerlevel10k, 
+Zsh + omz(plugins:git), zinit:zsh-autosuggestions fast-sytax-highlighting fzf zsh-zoxide atuin theme:powerlevel10k, 
 
 Terminal multiplexsor:
 Zellij
