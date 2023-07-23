@@ -189,8 +189,12 @@ alias dnf="dnf5"
 alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
 
 #arch only
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" ]]; then
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 alias update="sudo pacman -Syyu && sudo paru -Syu"
+
+#deb based
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
+alias update="sudo apt update && sudo apt upgrade && sudo apt autoremove"
 
 #flatpak update
 alias fli="flatpak install"
