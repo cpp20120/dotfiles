@@ -75,7 +75,7 @@ Mail Client:
 Mutt
 KMail
 
-TUI utilites:
+CLI/TUI utilites:
 fzf
 bat
 iftop
