@@ -190,7 +190,7 @@ alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
 
 #arch-based update
 if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
-alias update="sudo pacman -Syyu && sudo paru -Syu"
+alias update="sudo pacman -Syyu && sudo yay -Syu"
 
 #debian-based update
 if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
