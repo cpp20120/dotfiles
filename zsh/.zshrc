@@ -184,10 +184,17 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 
 #fedora only
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
 alias dnf="dnf5"
+alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
+
+#arch only
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" ]]; then
+alias update="sudo pacman -Syyu && sudo paru -Syu"
+
+#flatpak update
 alias fli="flatpak install"
 alias flu="flatpak update"
-alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
 
 #extract archives
 extract () {
