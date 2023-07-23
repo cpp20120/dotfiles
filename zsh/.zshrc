@@ -183,16 +183,16 @@ alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 
-#fedora only
+#fedora update
 if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
 alias dnf="dnf5"
 alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
 
-#arch only
+#arch-based update
 if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 alias update="sudo pacman -Syyu && sudo paru -Syu"
 
-#deb based
+#debian-based update
 if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
 alias update="sudo apt update && sudo apt upgrade && sudo apt autoremove"
 
