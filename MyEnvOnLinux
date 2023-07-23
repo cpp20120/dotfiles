@@ -80,6 +80,8 @@ fzf
 bat
 iftop
 iptraf
+nload
+aria2
 btop
 htop
 nvtop
