@@ -249,6 +249,7 @@ zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light junegunn/fzf
 zinit light z-shell/zsh-zoxide
 zinit load ellie/atuin
+zinit ice depth=1; zplugin light romkatv/powerlevel10k
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
