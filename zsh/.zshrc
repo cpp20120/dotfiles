@@ -1,6 +1,14 @@
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+source ~/.p10k.zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -8,7 +16,10 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="powerlevel10k/powerlevel10k"
+
+
+
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -25,7 +36,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
+ zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -70,8 +81,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf)
-
+plugins=(git fzf npm history jsontools) 
+#alt+c directory search 
+#ctrl+r history search
+#ctrl+t file search
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -142,8 +155,8 @@ alias t='exa --tree --level=2 --long'
 alias crg_run='cargo build && cargo run'
 
 #clang
-alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
-alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 && ./test; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 
 #docker
 alias dcu='docker-compose up -d'
@@ -183,22 +196,20 @@ alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 
-#fedora update
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
-alias dnf="dnf5"
-alias update="sudo dnf5 update -y && sudo dnf5 upgrade"
-
-#arch-based update
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
-alias update="sudo pacman -Syyu && sudo yay -Syu"
+##arch-based update
+#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
+#alias update="sudo pacman -Syyu && sudo yay -Syu"
 
 #debian-based update
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
-alias update="sudo apt update && sudo apt upgrade && sudo apt autoremove"
+#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
+#alias update="sudo apt update && sudo apt upgrade && sudo apt autoremove"
 
-#flatpak update
+#fedora only
+#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
+alias dnf="dnf5"
 alias fli="flatpak install"
 alias flu="flatpak update"
+alias update="sudo dnf5 update -y && sudo dnf5 upgrade; flatpak update"
 
 #extract archives
 extract () {
@@ -357,6 +368,8 @@ bindkey '^[f^[u' fzf-flatpak-uninstall-widget #alt-f + alt-u
 zle -N fzf-flatpak-uninstall-widget
 
 
+zinit load ellie/atuin
+
 ### End of Zinit's installer chunk
 export ATUIN_SESSION=$(atuin uuid)
 export ATUIN_HISTORY="atuin history list"
@@ -409,3 +422,7 @@ fi
 eval "$(zoxide init zsh)"
 
 eval "$(atuin init zsh)"
+eval "$(starship init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
