@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set (VCPKG_HOME "$ENV{HOME}/vcpkg")
 set (CMAKE_TOOLCHAIN_FILE "${VCPKG_HOME}/scripts/buildsystems/vcpkg.cmake")
+
+add_compile_options(-Wall -Wextra -Wpedantic -Werror -std=c++20 -fuse-ld=lld)
 #doxygen
 if (DOCS)
     add_subdirectory(docs)
