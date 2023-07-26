@@ -1,0 +1,5 @@
+[generators]
+CMakeToolchain
+
+[requires]
+boost/1.82.0
