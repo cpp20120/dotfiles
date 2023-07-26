@@ -3,3 +3,6 @@ CMakeToolchain
 
 [requires]
 boost/1.82.0
+doxygen/1.9.4
+fmt/10.0.0
+gtest/1.13.0
