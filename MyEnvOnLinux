@@ -16,7 +16,7 @@ Clang + lld
 ClangD
 Clang-format
 LLDB
-Cmake+Ninja+Vcpkg
+Cmake+Ninja+Vcpkg/Conan
 glslc
 
 Rust:
