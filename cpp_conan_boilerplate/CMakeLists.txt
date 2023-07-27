@@ -6,6 +6,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(BUILD_WITH_CONAN ON)
+
+add_compile_options(-Wall -Wextra -Wpedantic -Werror -std=c++20)
+set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=lld)
+
 #doxygen
 if (DOCS)
     add_subdirectory(docs)
