@@ -196,6 +196,7 @@ alias dtl='dotnet tool list'
 alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
+alias nuget='mono /usr/local/bin/nuget'
 
 ##arch-based update
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
