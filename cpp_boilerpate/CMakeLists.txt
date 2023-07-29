@@ -42,7 +42,7 @@ find_package(glm CONFIG REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glm)
 
 find_package(glad CONFIG REQUIRED)
-target_link_libraries(main PRIVATE glad::glad)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE glad::glad)
 
 find_package(Vulkan REQUIRED)
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Vulkan::Vulkan)
