@@ -6,6 +6,7 @@ boost/1.82.0
 doxygen/1.9.4
 fmt/10.0.0
 gtest/1.13.0
+poco/1.12.4
 //for graphics projects
 glad/0.1.34
 glew/2.2.0
