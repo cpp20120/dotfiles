@@ -101,6 +101,14 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='nvim'
  fi
 
+#cuda path
+# Cuda
+export PATH=/usr/local/cuda-12.2/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda-12.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+
+#vulkan
+export PATH=/usr/local/vulkan${PATH:+:$PATH}
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -116,9 +124,10 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cat='bat'
 alias du='dust'
-alias clg_run='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_dbg='f() {clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_tst='f() {clang++ -Wall -o test "$@" -std=c++20 -stdlib=libc++ -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_run='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_mld='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=mold && ./test; unset -f f;}; f'
+alias clg_dbg='f() {clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias cl='clear'
 alias count='find . -type f | wc -l'
 alias e='echo'
@@ -158,6 +167,7 @@ alias crg_run='cargo build && cargo run'
 #clang
 alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
 
 #docker
 alias dcu='docker-compose up -d'
@@ -197,7 +207,6 @@ alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='mono /usr/local/bin/nuget'
-
 ##arch-based update
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 #alias update="sudo pacman -Syyu && sudo yay -Syu"
@@ -255,6 +264,10 @@ pk () {
  fi
 }
 
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 #zinit plugins
 zinit light zsh-users/zsh-autosuggestions
@@ -295,6 +308,13 @@ export CMAKE_GENERATOR=Ninja
 
 #gradle
 export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
+
+#docker-composev2
+#export PATH=
+
+#deno
+export DENO_INSTALL="/home/cppshizoid/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 ##!/bin/zsh
 if
