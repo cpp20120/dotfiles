@@ -207,6 +207,7 @@ alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='mono /usr/local/bin/nuget'
+
 ##arch-based update
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 #alias update="sudo pacman -Syyu && sudo yay -Syu"
@@ -276,6 +277,7 @@ zinit light junegunn/fzf
 zinit light z-shell/zsh-zoxide
 zinit load ellie/atuin
 zinit ice depth=1; zplugin light romkatv/powerlevel10k
+zinit light darvid/zsh-poetry
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
