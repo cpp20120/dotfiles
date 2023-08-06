@@ -2,6 +2,7 @@
 .
 ├── docs
 │   └── CMakeLists.txt
+│   └── Doxyfile.in  
 ├── include
 │   └── *.hpp
 │── shaders(for graphics project)
