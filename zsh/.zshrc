@@ -208,7 +208,7 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='mono /usr/local/bin/nuget'
 
-##arch-based update
+##arch-based update (also export clang as compiler in makepkg)
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 #alias update="sudo pacman -Syyu && sudo yay -Syu"
 
