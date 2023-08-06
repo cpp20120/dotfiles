@@ -1,4 +1,4 @@
-qt6 based project boilerplate
+### Qt6 based project boilerplate
 
 ```sh
 mkdir build && cd build
