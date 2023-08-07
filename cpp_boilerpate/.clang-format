@@ -1,5 +1,5 @@
 ---
-# clang-format version: 15.0.7
+# clang-format version: 16.0.6
 Language: Cpp
 Standard: Latest
 AccessModifierOffset: -4
