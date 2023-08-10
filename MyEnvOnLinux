@@ -61,6 +61,18 @@ Kafka
 Gitlab
 OpenVPN/Wireguard
 
+C/C++ Libs
+imgui
+glfw
+glm 
+glew
+drogon
+poco 
+boost 
+openal
+cuda
+openmp
+
 Files:
 Ranger(TUI)
 Thunar(GUI)
