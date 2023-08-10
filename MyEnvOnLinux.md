@@ -1,16 +1,21 @@
-OS:
+* OS:
+
 Fedora
 
-DE:
+* DE:
+
 KDE Plasma
 
-Terminal Emulator:
+* Terminal Emulator:
+
 WezTerm
 
-Main Text Editor:
+* Main Text Editor:
+
 Neovim
 
-C/C++:
+* C/C++:
+
 Nvim/Clion
 Clang + lld
 ClangD
@@ -26,7 +31,8 @@ vulkan-loader
 vulkan-headers
 vulkan-tools
 
-Rust:
+* Rust:
+
 Nvim
 Cargo
 Rust-analyzer
@@ -34,24 +40,28 @@ wgsl-analyzer(from ![cargo](https://github.com/wgsl-analyzer/wgsl-analyzer))
 rustfmt
 LLDB
 
-Java:
+* Java:
+
 Intellij IDEA
 OpenJDK+Maven
 
-C#:
+* C#:
+
 Rider
 .NET SDK 7
 .NET Runtime 7
 MSSQL
 
-Python:
+* Python:
+
 Nvim
 pyright
 pylint
 Flake8
 Poetry
 
-Other:
+* Other:
+
 Postrgres, PGAdmin
 Docker
 Postman
