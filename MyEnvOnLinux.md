@@ -65,7 +65,8 @@ Neovim
   <li>Poetry
 </ul>
 
-* Other:
+
+## Other:
 <ul>
   <li>Postrgres, PGAdmin
   <li>Docker
