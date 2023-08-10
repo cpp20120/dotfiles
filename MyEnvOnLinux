@@ -16,16 +16,21 @@ Clang + lld
 ClangD
 Clang-format
 LLDB
-Doxygen
+Valgrind 
+Doxygen + Doxygen Wizard
 Cmake+Ninja+Vcpkg/Conan
 glslc
 shaderc
 spirv
+vulkan-loader
+vulkan-headers
+vulkan-tools
 
 Rust:
 Nvim
 Cargo
 Rust-analyzer
+wgsl-analyzer(from cargo)
 rustfmt
 LLDB
 
@@ -50,6 +55,7 @@ Other:
 Postrgres, PGAdmin
 Docker
 Postman
+qpwgraph
 
 Devops tools(need to learn):
 Linux Administration, Bash
@@ -66,6 +72,15 @@ Jenkins
 Kafka
 Gitlab
 OpenVPN/Wireguard
+
+Flatak:
+JMeter
+Discord
+OBS
+Podman
+Telegram
+Obsidian
+Shadered
 
 C/C++ Libs
 imgui
@@ -87,7 +102,7 @@ Shell:
 Zsh + omz(plugins:git, fzf), zinit:zsh-autosuggestions fast-sytax-highlighting fzf zsh-zoxide atuin, theme:powerlevel10k, 
 
 Terminal multiplexsor:
-Zellij
+Zellij/Tmux
 
 Mail Client:
 Mutt
@@ -120,3 +135,4 @@ zip
 unzip
 urar
 atool
+lm_sensors
