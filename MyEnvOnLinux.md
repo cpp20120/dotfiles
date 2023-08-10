@@ -1,20 +1,20 @@
-* OS:
+# OS:
 
 Fedora
 
-* DE:
+# DE:
 
 KDE Plasma
 
-* Terminal Emulator:
+# Terminal Emulator:
 
 WezTerm
 
-* Main Text Editor:
+# Main Text Editor:
 
 Neovim
 
-* C/C++:
+# C/C++:
 <ul>
   <li>Nvim/Clion
   <li>Clang + lld
@@ -32,7 +32,7 @@ Neovim
   <li>vulkan-tools
 </ul>
 
-* Rust:
+# Rust:
 <ul>
   <li>Nvim
   <li>Cargo
@@ -42,13 +42,13 @@ Neovim
   <li>LLDB
 </ul>
 
-* Java:
+# Java:
 <ul>
   <li>Intellij IDEA
   <li>OpenJDK+Maven
 </ul>
 
-* C#:
+# C#:
 <ul>
   <li>Rider
   <li>.NET SDK 7
@@ -56,7 +56,7 @@ Neovim
   <li>MSSQL
 </ul>
 
-* Python:
+# Python:
 <ul>
   <li>Nvim
   <li>pyright
