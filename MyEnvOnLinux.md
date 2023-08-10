@@ -1,6 +1,6 @@
 # OS:
 
-Fedora
+Fedora Linux 38
 
 # DE:
 
