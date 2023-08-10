@@ -66,11 +66,12 @@ Neovim
 </ul>
 
 * Other:
-
-Postrgres, PGAdmin
-Docker
-Postman
-qpwgraph
+<ul>
+  <li>Postrgres, PGAdmin
+  <li>Docker
+  <li>Docker-compose
+  <li>Postman
+</ul>
 
 Devops tools(need to learn):
 Linux Administration, Bash
@@ -78,8 +79,6 @@ Nginx, Envoy, Traefik
 Grafana
 Prometheus/Zabbix
 Kubernetes
-Docker
-Docker-compose
 Terraform
 Consul
 Ansinble
@@ -96,6 +95,7 @@ Podman
 Telegram
 Obsidian
 Shadered
+qpwgraph
 
 C/C++ Libs
 imgui
