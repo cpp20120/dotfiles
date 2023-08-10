@@ -37,7 +37,7 @@ Neovim
   <li>Nvim
   <li>Cargo
   <li>Rust-analyzer
-  <li>wgsl-analyzer from  [wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) </li>
+  <li>[wgsl-analyzer](https://github.com/wgsl-analyzer/wgsl-analyzer) 
   <li>rustfmt
   <li>LLDB
 </ul>
