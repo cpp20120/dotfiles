@@ -58,6 +58,7 @@ Neovim
 
 # Python:
 <ul>
+  <li>Python
   <li>Nvim
   <li>pyright
   <li>pylint
