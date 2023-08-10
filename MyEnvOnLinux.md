@@ -15,7 +15,6 @@ WezTerm
 Neovim
 
 * C/C++:
-
 <ul>
   <li>Nvim/Clion
   <li>Clang + lld
@@ -34,33 +33,37 @@ Neovim
 </ul>
 
 * Rust:
-
-Nvim
-Cargo
-Rust-analyzer
-wgsl-analyzer(from ![cargo](https://github.com/wgsl-analyzer/wgsl-analyzer))
-rustfmt
-LLDB
+<ul>
+  <li>Nvim
+  <li>Cargo
+  <li>Rust-analyzer
+  <li>wgsl-analyzer(from ![cargo](https://github.com/wgsl-analyzer/wgsl-analyzer))
+  <li>rustfmt
+  <li>LLDB
+</ul>
 
 * Java:
-
-Intellij IDEA
-OpenJDK+Maven
+<ul>
+  <li>Intellij IDEA
+  <li>OpenJDK+Maven
+</ul>
 
 * C#:
-
-Rider
-.NET SDK 7
-.NET Runtime 7
-MSSQL
+<ul>
+  <li>Rider
+  <li>.NET SDK 7
+  <li>.NET Runtime 7
+  <li>MSSQL
+</ul>
 
 * Python:
-
-Nvim
-pyright
-pylint
-Flake8
-Poetry
+<ul>
+  <li>Nvim
+  <li>pyright
+  <li>pylint
+  <li>Flake8
+  <li>Poetry
+</ul>
 
 * Other:
 
