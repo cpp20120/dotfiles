@@ -16,20 +16,22 @@ Neovim
 
 * C/C++:
 
-Nvim/Clion
-Clang + lld
-ClangD
-Clang-format
-LLDB
-Valgrind 
-Doxygen + Doxygen Wizard
-Cmake+Ninja+Vcpkg/Conan
-glslc
-shaderc
-spirv
-vulkan-loader
-vulkan-headers
-vulkan-tools
+<ul>
+  <li>Nvim/Clion
+  <li>Clang + lld
+  <li>ClangD
+  <li>Clang-format
+  <li>LLDB
+  <li>Valgrind 
+  <li>Doxygen + Doxygen Wizard
+  <li>Cmake+Ninja+Vcpkg/Conan
+  <li>glslc
+  <li>shaderc
+  <li>spirv
+  <li>vulkan-loader
+  <li>vulkan-headers
+  <li>vulkan-tools
+</ul>
 
 * Rust:
 
