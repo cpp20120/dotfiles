@@ -30,7 +30,7 @@ Rust:
 Nvim
 Cargo
 Rust-analyzer
-wgsl-analyzer(from cargo)
+wgsl-analyzer(from ![cargo](https://github.com/wgsl-analyzer/wgsl-analyzer))
 rustfmt
 LLDB
 
