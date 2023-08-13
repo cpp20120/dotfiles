@@ -208,6 +208,24 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='mono /usr/local/bin/nuget'
 
+#python
+alias pipi='pip install'
+alias p='p'
+
+#djngo
+alias pym='python manager.py'
+alias dj-sp='django-admin startproject'
+alias dj-sa='pym startapp'
+alias dj-rs='pym runserver'
+alias dj-mm='pym makemigrations'
+alias dj-mg='pym migrate'
+alias dj-sm='pym sqlmigrate'
+alias dj-ch='pym check'
+alias dj-sh='pym shell'
+alias dj-ds='pym dbshell'
+alias dj-cs='pym createsuperuser'
+alias dj-ts='pym test'
+
 ##arch-based update (also export clang as compiler in makepkg)
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 #alias update="sudo pacman -Syyu && sudo yay -Syu"
