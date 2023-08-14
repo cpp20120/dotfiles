@@ -2,6 +2,13 @@
 
 Fedora Linux 38
 
+# Sound
+pipewire
+alsamixer
+lsp-plugins
+easyeffects
+qpwgraph
+
 # DE:
 
 KDE Plasma
@@ -153,3 +160,4 @@ unzip
 urar
 atool
 lm_sensors
+feh
