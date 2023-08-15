@@ -24,6 +24,7 @@ glfw/3.3.2
 glm/0.9.9.8
 imgui/1.89.7
 vulkan-headers/1.3.250
+tinyobjloader/2.0.0
 
 //audio lib
 openal/1.22.2
