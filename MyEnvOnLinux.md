@@ -161,3 +161,5 @@ urar
 atool
 lm_sensors
 feh
+navi
+lnav
