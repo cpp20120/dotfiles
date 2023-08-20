@@ -155,6 +155,7 @@ zoxide
 delta
 httpie
 diff-so-fancy
+sad
 zip
 unzip
 urar
