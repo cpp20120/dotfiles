@@ -164,3 +164,4 @@ lm_sensors
 feh
 navi
 lnav
+icat
