@@ -79,6 +79,7 @@ Neovim
   <li>Postrgres, PGAdmin
   <li>Docker
   <li>Docker-compose
+  <li>Hadolint
   <li>Postman
 </ul>
 
