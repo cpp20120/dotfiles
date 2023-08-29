@@ -81,7 +81,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf npm history jsontools) 
+plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history jsontools sudo copyfile copybuffer) 
 #alt+c directory search 
 #ctrl+r history search
 #ctrl+t file search
@@ -103,8 +103,8 @@ source $ZSH/oh-my-zsh.sh
 
 #cuda path
 # Cuda
-export PATH=/usr/local/cuda-12.2/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda-12.2/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 
 #vulkan
 export PATH=/usr/local/vulkan${PATH:+:$PATH}
@@ -208,11 +208,11 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='mono /usr/local/bin/nuget'
 
-#python
+#python 
 alias pipi='pip install'
-alias p='p'
+alias p='python'
 
-#djngo
+#django
 alias pym='python manager.py'
 alias dj-sp='django-admin startproject'
 alias dj-sa='pym startapp'
@@ -236,7 +236,7 @@ alias dj-ts='pym test'
 
 #fedora only
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
-alias dnf="dnf5"
+#alias dnf="dnf5"
 alias fli="flatpak install"
 alias flu="flatpak update"
 alias update="sudo dnf5 update -y && sudo dnf5 upgrade; flatpak update"
@@ -318,7 +318,13 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
+#cargo 
+export PATH=$PATH:/home/cppshidoiz/.cargo/bin
 
+export PATH=$PATH:/home/cppshidoiz/go/bin
+
+#dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 #vcpkg
 export VCPKG_ROOT=/usr/bin/vcpkg
@@ -328,6 +334,10 @@ export CMAKE_GENERATOR=Ninja
 
 #gradle
 export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
+
+#sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 #docker-composev2
 #export PATH=
@@ -347,6 +357,8 @@ IFS=: read -ra selected < <(
         --preview-window 'up,60%,border-bottom,+{2}+3/3,~3'
 )
 [ -n "${selected[0]}" ] && nvim "${selected[0]}" "+${selected[1]}"fi
+
+
 
 # Searches only from flathub repository
 fzf-flatpak-install-widget() {
@@ -468,3 +480,7 @@ eval "$(starship init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
