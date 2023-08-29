@@ -321,6 +321,7 @@ zinit light-mode for \
 #cargo 
 export PATH=$PATH:/home/cppshidoiz/.cargo/bin
 
+#go
 export PATH=$PATH:/home/cppshidoiz/go/bin
 
 #dotnet
