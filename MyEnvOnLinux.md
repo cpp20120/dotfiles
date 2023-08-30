@@ -67,6 +67,8 @@ Neovim
 # Python:
 <ul>
   <li>Python
+  <li>pip
+  <li>pipx
   <li>Nvim
   <li>pyright
   <li>pylint
