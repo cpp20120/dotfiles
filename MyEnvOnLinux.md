@@ -53,6 +53,7 @@ Neovim
 <ul>
   <li>Intellij IDEA
   <li>OpenJDK+Maven
+  <li>skdman
 </ul>
 
 # C#:
