@@ -144,6 +144,7 @@ aria2
 btop
 htop
 nvtop
+nvitop
 ripgrep
 dust
 lfs
