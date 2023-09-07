@@ -17,10 +17,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 
-
-
-
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -152,6 +148,9 @@ alias pycharm= '~/.local/share/JetBrains/Toolbox/scripts/pycharm'
 alias idea= '~/.local/share/JetBrains/Toolbox/scripts/idea'
 alias datagrip= '~/.local/share/JetBrains/Toolbox/scripts/datagrip'
 alias androidstudio= '~/.local/share/JetBrains/Toolbox/scripts/studio'
+
+#nvitop
+alias nvitop='pipx run nvitop' 
 
 #exa
 alias ls='exa'
@@ -342,6 +341,9 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 #docker-composev2
 #export PATH=
+#docker-rootless
+export PATH=/home/cppshidoiz/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
 
 #deno
 export DENO_INSTALL="/home/cppshizoid/.deno"
