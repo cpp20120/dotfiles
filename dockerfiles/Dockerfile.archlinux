@@ -7,7 +7,6 @@ LABEL com.github.containers.toolbox="true" \
       version="$VERSION" \
       usage="This image is meant to be used with the toolbox command" \
       summary="Base image for creating Arch toolbox containers" \
-      maintainer="Emanuele Palazzetti <emanuele.palazzetti@gmail.com>"
 
 # Install required dependencies to run `toolbox`
 RUN pacman -Sy sudo git --noconfirm && \
