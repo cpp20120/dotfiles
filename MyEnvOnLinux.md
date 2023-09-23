@@ -27,6 +27,7 @@ Neovim
   <li>Clang + lld
   <li>ClangD
   <li>Clang-format
+  <li>Clang-tidy
   <li>LLDB
   <li>Valgrind 
   <li>Doxygen + Doxygen Wizard
