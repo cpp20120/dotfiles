@@ -11,7 +11,7 @@ qpwgraph
 
 # DE:
 
-KDE Plasma
+KDE Plasma on Wayland
 
 # Terminal Emulator:
 
@@ -122,6 +122,7 @@ boost
 openal
 cuda
 openmp
+qt5/6
 
 Files:
 Ranger(TUI)
