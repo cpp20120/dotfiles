@@ -152,6 +152,10 @@ alias androidstudio= '~/.local/share/JetBrains/Toolbox/scripts/studio'
 #nvitop
 alias nvitop='pipx run nvitop' 
 
+#docker
+alias docstats='docker stats $(docker ps -q)'                                  # stats on images
+alias docimg='docker images'                                                   # list images installed
+
 #exa
 alias ls='exa'
 alias l='exa -l --all --group-directories-first --git'
