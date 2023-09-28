@@ -238,7 +238,7 @@ alias dj-ts='pym test'
 #alias dnf="dnf5"
 alias fli="flatpak install"
 alias flu="flatpak update"
-alias update="sudo dnf5 update -y && sudo dnf5 upgrade; flatpak update"
+alias update="sudo dnf5 update -y; flatpak update"
 
 #extract archives
 extract () {
