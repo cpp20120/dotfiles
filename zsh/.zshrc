@@ -154,7 +154,11 @@ alias nvitop='pipx run nvitop'
 
 #docker
 alias docstats='docker stats $(docker ps -q)'                                  # stats on images
-alias docimg='docker images'                                                   # list images installed
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias dim='docker images'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
 
 #exa
 alias ls='exa'
