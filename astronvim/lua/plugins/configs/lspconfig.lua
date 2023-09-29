@@ -53,4 +53,5 @@ return function(_, _)
   else
     setup_servers()
   end
+  return { cmd = { "clangd", "--offset-encoding=utf-16"} }
 end
