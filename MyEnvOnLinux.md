@@ -15,7 +15,7 @@ KDE Plasma on Wayland
 
 # Terminal Emulator:
 
-WezTerm
+Kitty
 
 # Main Text Editor:
 
