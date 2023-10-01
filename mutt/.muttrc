@@ -11,7 +11,7 @@ set from = "alex.krivoschecov@gmail.com"
 set realname = "Alex Krivoschecov"
 
 # Change the following line to a different editor you prefer.
-set editor = "vim"
+set editor = "nvim"
 
 # Configuration
 set folder = "imaps://imap.gmail.com:993"
