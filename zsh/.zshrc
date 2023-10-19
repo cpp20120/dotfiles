@@ -138,6 +138,9 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
 
+alias weather='~/Scripts/weather.sh'
+alias rfv='~/Sripts/rfv.zsh'
+
 #mounted devices
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 
@@ -233,6 +236,9 @@ alias dj-ds='pym dbshell'
 alias dj-cs='pym createsuperuser'
 alias dj-ts='pym test'
 
+#colima
+alias colima='/usr/local/bin/colima-Linux-x86_64
+
 ##arch-based update (also export clang as compiler in makepkg)
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
 #alias update="sudo pacman -Syyu && sudo yay -Syu"
@@ -244,6 +250,7 @@ alias dj-ts='pym test'
 #fedora only
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
 #alias dnf="dnf5"
+alias dnfi="sudo dnf5 install"
 alias fli="flatpak install"
 alias flu="flatpak update"
 alias update="sudo dnf5 update -y; flatpak update"
