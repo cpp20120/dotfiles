@@ -216,7 +216,7 @@ alias dtl='dotnet tool list'
 alias dts='dotnet tool search'
 alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
-alias nuget='mono /usr/local/bin/nuget'
+alias nuget='dotnet nuget'
 
 #python 
 alias pipi='pip install'
