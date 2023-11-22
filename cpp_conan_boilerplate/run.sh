@@ -1,14 +1,25 @@
 #!/bin/bash
-if [ $(dpkg-query -W -f='${Status}' conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=) +')" == "Debian" ]];
 then
-  sudo apt-get install conan;
+  if [ $(dpkg-query -W -f='${Status}' conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
+  then
+    sudo apt-get -y install conan cmake ninja clang;
+  fi
 fi
 
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]];
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "Fedora" ]];
 then
   if [ $( rpm -qa --quiet | grep conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
   then
-    sudo dnf install conan;
+    sudo dnf -y install conan cmake ninja clang;
+  fi
+fi
+
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "Arch" ]];
+then
+  if
+  then
+    yay -S -y conan cmake ninja clang;
   fi
 fi
 
