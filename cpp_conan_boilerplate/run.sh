@@ -4,8 +4,12 @@ then
   sudo apt-get install conan;
 fi
 
-if [ $( rpm -qa --quiet | grep conan 2>/dev/null | grep -c "ok installed") -eq 0]
-  sudo dnf install conan;
+if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]];
+then
+  if [ $( rpm -qa --quiet | grep conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
+  then
+    sudo dnf install conan;
+  fi
 fi
 
 set -e
