@@ -48,7 +48,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -60,6 +60,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
+
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -77,8 +78,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history jsontools sudo copyfile copybuffer) 
-#alt+c directory search 
+plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history jsontools systemd sudo copyfile copybuffer thefuck fzf-zsh-plugin)
+#alt+c directory search
 #ctrl+r history search
 #ctrl+t file search
 source $ZSH/oh-my-zsh.sh
@@ -97,14 +98,12 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='nvim'
  fi
 
-#cuda path
-# Cuda
-export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
-export LD_LIBRARY_PATH=/usr/local/cuda/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-
-#vulkan
-export PATH=/usr/local/vulkan${PATH:+:$PATH}
-
+#nvim
+export PATH="$HOME/.local/share/nvim/mason/bin"
+#pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -112,23 +111,20 @@ export PATH=/usr/local/vulkan${PATH:+:$PATH}
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias s='source ~/.zshrc'
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias cat='bat'
-alias du='dust'
-alias clg_tst='f() {clang++ -Wall -o test "$@" -std=c++20 -stdlib=libc++ -fuse-ld=lld && ./test; unset -f f;}; f'
+alias cat='bat --theme="Catppuccin-mocha"'
+#alias du='dust'
+alias clg_stk='f() {clang++ -Wall -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_tst='f() {clang++ -Wall -o test "$@" -stdlib=libc++ -std=c++23 -fexceptions -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_run='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_mld='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=mold && ./test; unset -f f;}; f'
 alias clg_dbg='f() {clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias cl='clear'
 alias count='find . -type f | wc -l'
 alias e='echo'
 alias gh='history|grep'
-alias nf='neofetch'
+alias nf='fastfetch'
 alias nv='nvim'
 alias v='vim'
 alias ..="cd .."
@@ -138,8 +134,12 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
 
+#scripts run aliases
 alias weather='~/Scripts/weather.sh'
-alias rfv='~/Sripts/rfv.zsh'
+alias rfv='~/Scripts/rfv.zsh'
+alias rfc='~/Scripts/rfc.zsh'
+export FZF_DEFAULT_OPTS="--preview-window 'right:60%' --preview 'bat --color=always {} --style=header,grid --line-range :300 {}'"
+
 
 #mounted devices
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
@@ -153,41 +153,32 @@ alias datagrip= '~/.local/share/JetBrains/Toolbox/scripts/datagrip'
 alias androidstudio= '~/.local/share/JetBrains/Toolbox/scripts/studio'
 
 #nvitop
-alias nvitop='pipx run nvitop' 
-
-#docker
-alias docstats='docker stats $(docker ps -q)'                                  # stats on images
-alias dcu='docker-compose up -d'
-alias dcd='docker-compose down'
-alias dim='docker images'
-alias dps='docker ps'
-alias dpsa='docker ps -a'
+alias nvitop='pipx run nvitop'
 
 #exa
 alias ls='exa'
 alias l='exa -l --all --group-directories-first --git'
 alias ll='exa -l --all --all --group-directories-first --git'
 alias lt='exa -T --git-ignore --level=2 --group-directories-first'
-alias llt='exa -lT --git-ignore --level=2 --group-directories-first' 
+alias llt='exa -lT --git-ignore --level=2 --group-directories-first'
 alias lT='exa -T --git-ignore --level=4 --group-directories-first'
 alias t='exa --tree --level=2 --long'
+
 #rust
 alias crg_run='cargo build && cargo run'
 
 #clang
-alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ --debug -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
 
 #docker
+alias docstats='docker stats $(docker ps -q)'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 alias dim='docker images'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
-
-#clickhouse
-alias clickhouse='~./clickhouse'
 
 #dotnet
 alias di='dotnet --info'
@@ -218,7 +209,7 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='dotnet nuget'
 
-#python 
+#python
 alias pipi='pip install'
 alias p='python'
 
@@ -237,7 +228,7 @@ alias dj-cs='pym createsuperuser'
 alias dj-ts='pym test'
 
 #colima
-alias colima='/usr/local/bin/colima-Linux-x86_64
+alias colima='/usr/local/bin/colima-Linux-x86_64'
 
 ##arch-based update (also export clang as compiler in makepkg)
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
@@ -250,10 +241,10 @@ alias colima='/usr/local/bin/colima-Linux-x86_64
 #fedora only
 #if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
 #alias dnf="dnf5"
-alias dnfi="sudo dnf5 install"
-alias fli="flatpak install"
-alias flu="flatpak update"
-alias update="sudo dnf5 update -y; flatpak update"
+alias dnfi='sudo dnf5 install'
+alias fli='flatpak install'
+alias flu='flatpak update'
+alias update='sudo dnf5 update -y && sudo dnf5 upgrade; flatpak update; zinit update --all'
 
 #extract archives
 extract () {
@@ -297,6 +288,7 @@ pk () {
  fi
 }
 
+
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -304,12 +296,16 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 #zinit plugins
 zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light junegunn/fzf
 zinit light z-shell/zsh-zoxide
 zinit load ellie/atuin
 zinit ice depth=1; zplugin light romkatv/powerlevel10k
 zinit light darvid/zsh-poetry
+zinit light MichaelAquilina/zsh-you-should-use
+zinit light redxtech/zsh-kitty
+zgen load fdw/ranger_zoxide
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -332,37 +328,9 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
-#cargo 
-export PATH=$PATH:/home/cppshidoiz/.cargo/bin
 
-#go
-export PATH=$PATH:/home/cppshidoiz/go/bin
 
-#dotnet
-export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
-#vcpkg
-export VCPKG_ROOT=/usr/bin/vcpkg
-
-#ninja
-export CMAKE_GENERATOR=Ninja
-
-#gradle
-export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
-
-#sdkman
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-#docker-composev2
-#export PATH=
-#docker-rootless
-export PATH=/home/cppshidoiz/bin:$PATH
-export DOCKER_HOST=unix:///run/user/1000/docker.sock
-
-#deno
-export DENO_INSTALL="/home/cppshizoid/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 ##!/bin/zsh
 if
@@ -383,9 +351,9 @@ fzf-flatpak-install-widget() {
   flatpak remote-ls flathub --cached --columns=app,name,description \
   | awk -v cyn=$(tput setaf 6) -v blu=$(tput setaf 4) -v bld=$(tput bold) -v res=$(tput sgr0) \
   '{
-    app_info=""; 
+    app_info="";
     for(i=2;i<=NF;i++){
-      app_info=cyn app_info" "$i 
+      app_info=cyn app_info" "$i
     };
     print blu bld $2" -" res app_info "|" $1
     }' \
@@ -396,7 +364,7 @@ fzf-flatpak-install-widget() {
     --prompt="Install > " \
     --preview-window "nohidden,40%,<50(down,50%,border-rounded)" \
     --preview "flatpak --system remote-info flathub {-1} | $AWK_VAR -F\":\" '{print YLW BLD \$1 RST WHT \$2}'" \
-    --bind "enter:execute(flatpak install flathub {-1})" # when pressed enter it doesnt showing the key pressed but it is reading the input
+    --bind "enter:execute(flatpak install flathub {-1})" # when pressed enter it doesn't showing the key pressed but it is reading the input
   zle reset-prompt
 }
 
@@ -426,12 +394,12 @@ fzf-flatpak-uninstall-widget() {
     --bind "alt-r:change-prompt(Run > )+execute-silent(touch /tmp/run && rm -r /tmp/uns)" \
     --bind "alt-u:change-prompt(Uninstall > )+execute-silent(touch /tmp/uns && rm -r /tmp/run)" \
     --bind "enter:execute(
-    if [ -f /tmp/uns ]; then 
-      flatpak uninstall {3}; 
+    if [ -f /tmp/uns ]; then
+      flatpak uninstall {3};
     elif [ -f /tmp/run ]; then
-      flatpak run {3}; 
+      flatpak run {3};
     fi
-    )" # same as the install one but when pressed  entered the message is something like this 
+    )" # same as the install one but when pressed  entered the message is something like this
 # "Proceed with these changes to the system installation? [Y/n]:" but it will uninstall the selected app weird but idk y
   rm -f /tmp/{uns,run} &> /dev/null
   zle reset-prompt
@@ -496,9 +464,28 @@ eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
 
+# load zgen
+source "${HOME}/.zgen/zgen.zsh"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+autoload bashcompinit
+bashcompinit
+source /usr/bin/scripts/vcpkg_completion.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/cppshizoid/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/cppshizoid/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
