@@ -1,5 +1,4 @@
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
 source ~/.p10k.zsh
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -11,56 +10,45 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
-
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
-
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
  zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
 # Uncomment the following line to change how often to auto-update (in days).
 # zstyle ':omz:update' frequency 13
-
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
-
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
-
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
 # e.g. COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 # COMPLETION_WAITING_DOTS="true"
-
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
-
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -69,28 +57,22 @@ ENABLE_CORRECTION="true"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
-
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history jsontools systemd sudo copyfile copybuffer thefuck fzf-zsh-plugin)
-#alt+c directory search
+plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history systemd jsontools sudo copyfile copybuffer thefuck fzf-z fzf-zsh-plugin) 
+#alt+c directory search 
 #ctrl+r history search
 #ctrl+t file search
 source $ZSH/oh-my-zsh.sh
-
 # User configuration
-
 # export MANPATH="/usr/local/man:$MANPATH"
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-
 # Preferred editor for local and remote sessions
  if [[ -n $SSH_CONNECTION ]]; then
    export EDITOR='vim'
@@ -98,12 +80,10 @@ source $ZSH/oh-my-zsh.sh
    export EDITOR='nvim'
  fi
 
-#nvim
-export PATH="$HOME/.local/share/nvim/mason/bin"
-#pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+
+#vulkan
+export PATH=/usr/local/vulkan${PATH:+:$PATH}
+
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -111,13 +91,16 @@ eval "$(pyenv init -)"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-alias s='source ~/.zshrc'
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias s="source ~/.zshrc"
 alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
-alias cat='bat --theme="Catppuccin-mocha"'
-#alias du='dust'
-alias clg_stk='f() {clang++ -Wall -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_tst='f() {clang++ -Wall -o test "$@" -stdlib=libc++ -std=c++23 -fexceptions -fuse-ld=lld && ./test; unset -f f;}; f'
+alias cat='bat --theme="Catppuccin Mocha"'
+alias du='dust'
+alias clg_tst='f() {clang++ -Wall -o test "$@" -std=c++20 -stdlib=libc++ -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_run='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_dbg='f() {clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias cl='clear'
@@ -134,13 +117,8 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
 
-#scripts run aliases
 alias weather='~/Scripts/weather.sh'
 alias rfv='~/Scripts/rfv.zsh'
-alias rfc='~/Scripts/rfc.zsh'
-export FZF_DEFAULT_OPTS="--preview-window 'right:60%' --preview 'bat --color=always {} --style=header,grid --line-range :300 {}'"
-
-
 #mounted devices
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 
@@ -153,32 +131,41 @@ alias datagrip= '~/.local/share/JetBrains/Toolbox/scripts/datagrip'
 alias androidstudio= '~/.local/share/JetBrains/Toolbox/scripts/studio'
 
 #nvitop
-alias nvitop='pipx run nvitop'
+alias nvitop='pipx run nvitop' 
+
+#docker
+alias docstats='docker stats $(docker ps -q)'                                  # stats on images
+alias dcu='docker-compose up -d'
+alias dcd='docker-compose down'
+alias dim='docker images'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
 
 #exa
 alias ls='exa'
 alias l='exa -l --all --group-directories-first --git'
 alias ll='exa -l --all --all --group-directories-first --git'
 alias lt='exa -T --git-ignore --level=2 --group-directories-first'
-alias llt='exa -lT --git-ignore --level=2 --group-directories-first'
+alias llt='exa -lT --git-ignore --level=2 --group-directories-first' 
 alias lT='exa -T --git-ignore --level=4 --group-directories-first'
 alias t='exa --tree --level=2 --long'
-
 #rust
 alias crg_run='cargo build && cargo run'
 
 #clang
-alias clg_dbg='f(){ clang++ --debug -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
 
 #docker
-alias docstats='docker stats $(docker ps -q)'
 alias dcu='docker-compose up -d'
 alias dcd='docker-compose down'
 alias dim='docker images'
 alias dps='docker ps'
 alias dpsa='docker ps -a'
+
+#clickhouse
+alias clickhouse='~./clickhouse'
 
 #dotnet
 alias di='dotnet --info'
@@ -209,9 +196,10 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='dotnet nuget'
 
-#python
+#python 
 alias pipi='pip install'
 alias p='python'
+alias up='python -m pip install --upgrade pip'
 
 #django
 alias pym='python manager.py'
@@ -229,22 +217,11 @@ alias dj-ts='pym test'
 
 #colima
 alias colima='/usr/local/bin/colima-Linux-x86_64'
-
-##arch-based update (also export clang as compiler in makepkg)
-#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "arch" || "manjaro" || "endervouros" ]]; then
-#alias update="sudo pacman -Syyu && sudo yay -Syu"
-
-#debian-based update
-#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "debian" || "ubuntu"  ]]; then
-#alias update="sudo apt update && sudo apt upgrade && sudo apt autoremove"
-
-#fedora only
-#if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "fedora" ]]; then
-#alias dnf="dnf5"
-alias dnfi='sudo dnf5 install'
-alias fli='flatpak install'
-alias flu='flatpak update'
-alias update='sudo dnf5 update -y && sudo dnf5 upgrade; flatpak update; zinit update --all'
+#system
+alias dnfi="sudo dnf5 install"
+alias fli="flatpak install"
+alias flu="flatpak update"
+alias update="sudo dnf5 update -y; flatpak update"
 
 #extract archives
 extract () {
@@ -268,8 +245,6 @@ extract () {
  echo "'$1' is not a valid file"
  fi
 }
-
-
 #create archives
 pk () {
  if [ $1 ] ; then
@@ -288,7 +263,6 @@ pk () {
  fi
 }
 
-
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
@@ -296,16 +270,18 @@ source "${ZINIT_HOME}/zinit.zsh"
 
 #zinit plugins
 zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-completions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light junegunn/fzf
 zinit light z-shell/zsh-zoxide
 zinit load ellie/atuin
 zinit ice depth=1; zplugin light romkatv/powerlevel10k
 zinit light darvid/zsh-poetry
-zinit light MichaelAquilina/zsh-you-should-use
-zinit light redxtech/zsh-kitty
-zgen load fdw/ranger_zoxide
+#zplug
+#
+source ~/.zplug/init.zsh
+
+zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -319,7 +295,6 @@ fi
 source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
-
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
 zinit light-mode for \
@@ -328,9 +303,32 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
+#cargo 
+export PATH=$PATH:/home/cppshidoiz/.cargo/bin
+#go
+export PATH=$PATH:/home/cppshidoiz/go/bin
+#dotnet
+export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
+#vcpkg
+export VCPKG_ROOT=/usr/bin/vcpkg
 
+#ninja
+export CMAKE_GENERATOR=Ninja
 
+#gradle
+export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
 
+#sdkman
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+#docker-composev2
+#export PATH=
+#docker-rootless
+export PATH=/home/cppshidoiz/bin:$PATH
+export DOCKER_HOST=unix:///run/user/1000/docker.sock
+#deno
+export DENO_INSTALL="/home/cppshizoid/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 ##!/bin/zsh
 if
@@ -344,16 +342,27 @@ IFS=: read -ra selected < <(
 )
 [ -n "${selected[0]}" ] && nvim "${selected[0]}" "+${selected[1]}"fi
 
+# Searches only from flathub repository
+# CLR=$(for i in {0..7}; do echo "tput setaf $i"; done)
+BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4); 
+MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);    
 
+AWK_VAR="awk -v BLK=${BLK} -v RED=${RED} -v GRN=${GRN} -v YLW=${YLW} -v BLU=${BLU} -v MGN=${MGN} -v CYN=${CYN} -v WHT=${WHT} -v BLD=${BLD} -v RST=${RST}"
+
+# CLR=$(for i in {0..7}; do echo "tput setaf $i"; done)
+BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4); 
+MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);    
+
+AWK_VAR="awk -v BLK=${BLK} -v RED=${RED} -v GRN=${GRN} -v YLW=${YLW} -v BLU=${BLU} -v MGN=${MGN} -v CYN=${CYN} -v WHT=${WHT} -v BLD=${BLD} -v RST=${RST}"
 
 # Searches only from flathub repository
 fzf-flatpak-install-widget() {
   flatpak remote-ls flathub --cached --columns=app,name,description \
   | awk -v cyn=$(tput setaf 6) -v blu=$(tput setaf 4) -v bld=$(tput bold) -v res=$(tput sgr0) \
   '{
-    app_info="";
+    app_info=""; 
     for(i=2;i<=NF;i++){
-      app_info=cyn app_info" "$i
+      app_info=cyn app_info" "$i 
     };
     print blu bld $2" -" res app_info "|" $1
     }' \
@@ -367,8 +376,7 @@ fzf-flatpak-install-widget() {
     --bind "enter:execute(flatpak install flathub {-1})" # when pressed enter it doesn't showing the key pressed but it is reading the input
   zle reset-prompt
 }
-
-bindkey '^[f^[i' fzf-flatpak-install-widget #alt-f + alt-i
+bindkey '^[f' fzf-flatpak-install-widget #alt-f 
 zle -N fzf-flatpak-install-widget
 
 fzf-flatpak-uninstall-widget() {
@@ -394,12 +402,12 @@ fzf-flatpak-uninstall-widget() {
     --bind "alt-r:change-prompt(Run > )+execute-silent(touch /tmp/run && rm -r /tmp/uns)" \
     --bind "alt-u:change-prompt(Uninstall > )+execute-silent(touch /tmp/uns && rm -r /tmp/run)" \
     --bind "enter:execute(
-    if [ -f /tmp/uns ]; then
-      flatpak uninstall {3};
+    if [ -f /tmp/uns ]; then 
+      flatpak uninstall {3}; 
     elif [ -f /tmp/run ]; then
-      flatpak run {3};
+      flatpak run {3}; 
     fi
-    )" # same as the install one but when pressed  entered the message is something like this
+    )" # same as the install one but when pressed  entered the message is something like this 
 # "Proceed with these changes to the system installation? [Y/n]:" but it will uninstall the selected app weird but idk y
   rm -f /tmp/{uns,run} &> /dev/null
   zle reset-prompt
@@ -407,73 +415,191 @@ fzf-flatpak-uninstall-widget() {
 bindkey '^[f^[u' fzf-flatpak-uninstall-widget #alt-f + alt-u
 zle -N fzf-flatpak-uninstall-widget
 
+function cd() {
+    if [[ "$#" != 0 ]]; then
+        builtin cd "$@";
+        return
+    fi
+    while true; do
+        local lsd=$(echo ".." && ls -p | grep '/$' | sed 's;/$;;')
+        local dir="$(printf '%s\n' "${lsd[@]}" |
+            fzf --reverse --preview '
+                __cd_nxt="$(echo {})";
+                __cd_path="$(echo $(pwd)/${__cd_nxt} | sed "s;//;/;")";
+                echo $__cd_path;
+                echo;
+                ls -p --color=always "${__cd_path}";
+        ')"
+        [[ ${#dir} != 0 ]] || return 0
+        builtin cd "$dir" &> /dev/null
+    done
+}
 
+#!/usr/bin/bash
+readonly basename="$(basename "$0")"
+
+if ! hash fzf &> /dev/null; then
+    printf 'Error: Missing dep: fzf is required to use %s.\n' "${basename}" >&2
+    exit 64
+fi
+
+#Colors
+declare -r esc=$'\033'
+declare -r BLUE="${esc}[1m${esc}[34m"
+declare -r RED="${esc}[31m"
+declare -r GREEN="${esc}[32m"
+declare -r YELLOW="${esc}[33m"
+declare -r CYAN="${esc}[36m"
+# Base commands
+readonly QRY="dnf --cacheonly --quiet repoquery "
+readonly PRVW="dnf --cacheonly --quiet --color=always info"
+readonly QRY_PRFX='  '
+readonly QRY_SFFX=' > '
+# Install mode
+readonly INS_QRYS="${QRY} --qf '${CYAN}%{name}'"
+readonly INS_PRVW="${PRVW}"
+readonly INS_PRMPT="${CYAN}${QRY_PRFX}Install packages${QRY_SFFX}"
+# Remove mode
+readonly RMV_QRYS="${QRY} --installed --qf '${RED}%{name}'"
+readonly RMV_PRVW="${PRVW} --installed"
+readonly RMV_PRMPT="${RED}${QRY_PRFX}Remove packages${QRY_SFFX}"
+# Remove-userinstalled mode
+readonly RUI_QRYS="${QRY} --userinstalled --qf '${YELLOW}%{name}'"
+readonly RUI_PRVW="${PRVW} --installed"
+readonly RUI_PRMPT="${YELLOW}${QRY_PRFX}Remove User-Installed${QRY_SFFX}"
+# Updates mode
+readonly UPD_QRY="${QRY} --upgrades --qf '${GREEN}%{name}'"
+readonly UPD_QRYS="if [[ $(${UPD_QRY} | wc -c) -ne 0 ]]; then ${UPD_QRY}; else echo ${GREEN}No updates available.; echo Try refreshing metadata cache...; fi"
+readonly UPD_PRVW="${PRVW}"
+readonly UPD_PRMPT="${GREEN}${QRY_PRFX}Upgrade packages${QRY_SFFX}"
+
+mapfile -d '' fhelp <<-EOF
+
+        "${basename}"
+        Interactive package manager for Fedora
+
+        Alt-i       Install mode (default)
+        Alt-r       Remove mode
+        Alt-e       Remove User-Installed mode
+        Alt-u       Updates mode
+        Alt-m       Update package metadata cache
+
+        Enter       Confirm selection
+        Tab         Mark package ()
+        Shift-Tab   Unmark package
+        Ctrl-a      Select all
+
+        ?           Help (this page)
+        ESC         Quit
+EOF
+
+declare tmp_file
+if tmp_file="$(mktemp --tmpdir "${basename}".XXXXXX)"; then
+    printf 'in' > "${tmp_file}" &&
+    SHELL='/bin/bash' \
+    FZF_DEFAULT_COMMAND="${INS_QRYS}" \
+	fzf \
+    --ansi \
+	--multi \
+	--query=$* \
+	--header=" ${basename} | Press Alt+? for help or ESC to quit" \
+	--header-first \
+	--prompt="${INS_PRMPT}" \
+	--marker=' ' \
+	--preview-window='right,67%,wrap' \
+	--preview="${INS_PRVW} {1}" \
+	--bind="enter:execute(if grep -q 'in' \"${tmp_file}\"; then sudo dnf install {+}; 
+        elif grep -q 'rm' \"${tmp_file}\"; then sudo dnf remove {+}; \
+        elif grep -q 'up' \"${tmp_file}\"; then sudo dnf upgrade {+}; fi; \
+        read -s -r -n1 -p $'\n${BLUE}Press any key to continue...' && printf '\n')" \
+	--bind="alt-i:unbind(alt-i)+reload(${INS_QRYS})+change-preview(${INS_PRVW} {1})+change-prompt(${INS_PRMPT})+execute-silent(printf 'in' > \"${tmp_file}\")+first+rebind(alt-r,alt-e,alt-u)" \
+	--bind="alt-r:unbind(alt-r)+reload(${RMV_QRYS})+change-preview(${RMV_PRVW} {1})+change-prompt(${RMV_PRMPT})+execute-silent(printf 'rm' > \"${tmp_file}\")+first+rebind(alt-i,alt-e,alt-u)" \
+	--bind="alt-e:unbind(alt-e)+reload(${RUI_QRYS})+change-preview(${RUI_PRVW} {1})+change-prompt(${RUI_PRMPT})+execute-silent(printf 'rm' > \"${tmp_file}\")+first+rebind(alt-i,alt-r,alt-u)" \
+	--bind="alt-u:unbind(alt-u)+reload(${UPD_QRYS})+change-preview(${UPD_PRVW} {1})+change-prompt(${UPD_PRMPT})+execute-silent(printf 'up' > \"${tmp_file}\")+first+rebind(alt-i,alt-r,alt-e)" \
+	--bind="alt-m:execute(sudo dnf makecache;read -s -r -n1 -p $'\n${BLUE}Press any key to continue...' && printf '\n')" \
+	--bind="alt-?:preview(printf \"${fhelp[0]}\")" \
+	--bind="ctrl-a:select-all"
+    
+    rm -f "${tmp_file}" &> /dev/null
+else
+    printf 'Error: Failed to create tmp file. $TMPDIR (or /tmp if $TMPDIR is unset) may not be writable.\n' >&2
+    exit 65
+fi
+
+fzf-conda-activate () {
+    choice=(
+        $(
+            conda env list |
+            sed 's/\*/ /;1,2d' |
+            xargs -I {} bash -c '
+                name_path=( {} );
+                py_version=( $(${name_path[1]}/bin/python --version) );
+                echo ${name_path[0]} ${py_version[1]} ${name_path[1]}
+            ' |
+            column -t |
+            fzf --layout=reverse \
+                --info=inline \
+                --border=rounded \
+                --height=40 \
+                --preview-window="right:30%" \
+                --preview-label=" conda tree leaves " \
+                --preview=$'
+                    conda tree -p {3} leaves |
+                    perl -F\'[^\\w-_]\' -lae \'print for grep /./, @F;\' |
+                    sort
+                '
+        )
+    )
+    [[ -n "$choice" ]] && conda activate "$choice"
+}
+zle -N fzf-flatpak-uninstall-widget
 zinit load ellie/atuin
-
 ### End of Zinit's installer chunk
 export ATUIN_SESSION=$(atuin uuid)
 export ATUIN_HISTORY="atuin history list"
-
 _atuin_preexec(){
 	local id; id=$(atuin history start -- "$1")
 	export ATUIN_HISTORY_ID="$id"
 }
-
 _atuin_precmd(){
 	local EXIT="$?"
-
 	[[ -z "${ATUIN_HISTORY_ID}" ]] && return
-
-
 	(RUST_LOG=error atuin history end --exit $EXIT -- $ATUIN_HISTORY_ID &) > /dev/null 2>&1
 }
-
 _atuin_search(){
 	emulate -L zsh
 	zle -I
-
 	# Switch to cursor mode, then back to application
 	echoti rmkx
 	# swap stderr and stdout, so that the tui stuff works
 	output=$(RUST_LOG=error atuin search -i -- $BUFFER 3>&1 1>&2 2>&3)
 	echoti smkx
-
 	if [[ -n $output ]] ; then
 		RBUFFER=""
 		LBUFFER=$output
 	fi
-
 	zle reset-prompt
 }
-
 add-zsh-hook preexec _atuin_preexec
 add-zsh-hook precmd _atuin_precmd
-
 zle -N _atuin_search_widget _atuin_search
-
 if [[ -z $ATUIN_NOBIND ]]; then
 	bindkey '^r' _atuin_search_widget
-
 	# depends on terminal mode
 	bindkey '^[[A' _atuin_search_widget
 	bindkey '^[OA' _atuin_search_widget
 fi
-
 eval "$(zoxide init zsh)"
-
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
-
-# load zgen
-source "${HOME}/.zgen/zgen.zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 autoload bashcompinit
 bashcompinit
 source /usr/bin/scripts/vcpkg_completion.zsh
+
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -489,3 +615,8 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
