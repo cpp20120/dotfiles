@@ -9,7 +9,7 @@ set(BUILD_WITH_CONAN ON)
 
 add_compile_options(-Wall -Wextra -Wpedantic -Werror -std=c++20)
 #sanitizers
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g")
 set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=lld)
 
 find_program(IWYU_PROGRAM NAMES include-what-you-use) # https://github.com/include-what-you-use/include-what-you-use
