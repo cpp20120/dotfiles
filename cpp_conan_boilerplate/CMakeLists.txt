@@ -1,17 +1,19 @@
-cmake_minimum_required(VERSION 3.20)
-project(boosttemplate LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.26)
+project(${PROJECT_NAME} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-set(BUILD_WITH_CONAN ON)
 
 #sanitizers and other flags
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g")
 set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=lld)
 
 find_program(IWYU_PROGRAM NAMES include-what-you-use) # https://github.com/include-what-you-use/include-what-you-use
+if(IWYU_PROGRAM)
+  set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${IWYU_PROGRAM})
+endif()
 
 #doxygen
 if (DOCS)
@@ -29,30 +31,8 @@ function(copy_after_build TARGET_NAME)
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${TARGET_NAME}> ${DESTDIR})
 endfunction()
 
-#Conan Bootstrap 
-
-if(BUILD_WITH_CONAN)
-  message([INFO] " =>> Building with CONAN OK.")
-
-  if(NOT EXISTS "${CMAKE_BINARY_DIR}/conan.cmake")
-    message(
-      STATUS
-      "Downloading conan.cmake from https://github.com/conan-io/cmake-conan")
-    file(DOWNLOAD
-      "https://github.com/conan-io/cmake-conan/raw/v0.13/conan.cmake"
-      "${CMAKE_BINARY_DIR}/conan.cmake")
-  endif()
-
-  include(${CMAKE_BINARY_DIR}/conan.cmake)
-
-  # Add all dependencies here
-  conan_cmake_run(REQUIRES boost/1.70.0@conan/stable BASIC_SETUP BUILD missing)
-endif()
 
 # Find Packages 
-
-#  using static 
-set(Boost_USE_STATIC_LIBS ON)
 
 find_package(
   Boost
@@ -60,10 +40,10 @@ find_package(
   REQUIRED)
 
 #Target Configurations
-
 file(GLOB SOURCE_FILE src/*.cpp)
-add_executable(boosttemplate ${SOURCE_FILE})
-copy_after_build(boosttemplate)
+add_executable(${PROJECT_NAME} ${SOURCE_FILE})
+
+target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 if(NOT WIN32)
   target_link_libraries(boosttemplate Boost::system pthread)
