@@ -52,7 +52,7 @@ else()
   target_link_libraries(boosttemplate Boost::system)
 endif()
 
-
+#Use in graphics projects
 ############## Build SHADERS #######################
 find_program(GLSL_VALIDATOR glslangValidator HINTS 
   ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE} 
