@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.26)
-project(${PROJECT_NAME} LANGUAGES CXX)
+project(${PROJECT_NAME} LANGUAGES CXX) #change ${PROJECT_NAME} to actual projet name only in project()
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -46,10 +46,10 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILE})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 if(NOT WIN32)
-  target_link_libraries(boosttemplate Boost::system pthread)
+  target_link_libraries(${PROJECT_NAME} Boost::system pthread)
 else()
   # Windows WIN32 API
-  target_link_libraries(boosttemplate Boost::system)
+  target_link_libraries(${PROJECT_NAME} Boost::system)
 endif()
 
 #Use in graphics projects
