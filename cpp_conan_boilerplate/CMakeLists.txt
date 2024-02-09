@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-#sanitizers and other flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g")
+#lld 
 set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=lld)
 
 find_program(IWYU_PROGRAM NAMES include-what-you-use) # https://github.com/include-what-you-use/include-what-you-use
@@ -34,16 +33,7 @@ endfunction()
 
 # Find Packages 
 
-find_package(
-  Boost
-  COMPONENTS system coroutine
-  REQUIRED)
-
-#Target Configurations
-file(GLOB SOURCE_FILE src/*.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE_FILE})
-
-target_include_directories(${PROJECT_NAME} PRIVATE include)
+find_package(Boost)
 
 if(NOT WIN32)
   target_link_libraries(${PROJECT_NAME} Boost::system pthread)
@@ -51,6 +41,14 @@ else()
   # Windows WIN32 API
   target_link_libraries(${PROJECT_NAME} Boost::system)
 endif()
+
+#Target Configurations
+file(GLOB SOURCE_FILE src/*.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE_FILE})
+
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_compile_options(${PROJECT_NAME} PRIVATE Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g)
+
 
 #Use in graphics projects
 ############## Build SHADERS #######################
