@@ -1,27 +1,20 @@
 #!/bin/bash
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=) +')" == "Debian" ]];
-then
-  if [ $(dpkg-query -W -f='${Status}' conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
-  then
-    sudo apt-get -y install conan cmake ninja clang;
-  fi
+# Проверка типа дистрибутива
+if [ -x "$(command -v apt-get)" ]; then
+    # Debian/Ubuntu-based дистрибутив
+    sudo apt-get update
+    sudo apt-get install -y build-essential neofetch git clang clang-tools gcc cmake ninja-build lld lldb valgrind python3-pip doxygen neovim
+
+elif [ -x "$(command -v dnf)" ]; then
+    sudo dnf install -y @development-tools neofetch git clang clang-tools-extra gcc cmake ninja-build lld lldb valgrind python3-pip doxygen neovim
+
+
+else
+    echo "Не удалось определить дистрибутив и установщик пакетов."
+    exit 1
 fi
 
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "Fedora" ]];
-then
-  if [ $( rpm -qa --quiet | grep conan 2>/dev/null | grep -c "ok installed") -eq 0 ];
-  then
-    sudo dnf -y install conan cmake ninja clang;
-  fi
-fi
-
-if [[ "$(uname -s)" == "Linux" && "$(cat /etc/*-release | grep -oP '(?<=^ID=).+')" == "Arch" ]];
-then
-  if
-  then
-    yay -S -y conan cmake ninja clang;
-  fi
-fi
+pip3 install conan
 
 set -e
 set -x
@@ -36,3 +29,5 @@ cd build
 cmake .. -G Ninja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 ./test
+
+
