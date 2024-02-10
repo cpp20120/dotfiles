@@ -1,7 +1,6 @@
 #!/bin/bash
 # Проверка типа дистрибутива
 if [ -x "$(command -v apt-get)" ]; then
-    # Debian/Ubuntu-based дистрибутив
     sudo apt-get update
     sudo apt-get install -y build-essential neofetch git clang clang-tools gcc cmake ninja-build lld lldb valgrind python3-pip doxygen neovim
 
