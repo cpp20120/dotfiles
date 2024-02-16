@@ -100,9 +100,6 @@ alias zshconfig="nvim ~/.zshrc"
 alias ohmyzsh="nvim ~/.oh-my-zsh"
 alias cat='bat --theme="Catppuccin Mocha"'
 alias du='dust'
-alias clg_tst='f() {clang++ -Wall -o test "$@" -std=c++20 -stdlib=libc++ -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_run='f() {clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_dbg='f() {clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
 alias cl='clear'
 alias count='find . -type f | wc -l'
 alias e='echo'
@@ -119,6 +116,7 @@ alias to=". gotodir"
 
 alias weather='~/Scripts/weather.sh'
 alias rfv='~/Scripts/rfv.zsh'
+alias dnff='~/Scripts/dnf.sh'
 #mounted devices
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 
@@ -142,20 +140,26 @@ alias dps='docker ps'
 alias dpsa='docker ps -a'
 
 #exa
-alias ls='exa'
-alias l='exa -l --all --group-directories-first --git'
-alias ll='exa -l --all --all --group-directories-first --git'
-alias lt='exa -T --git-ignore --level=2 --group-directories-first'
-alias llt='exa -lT --git-ignore --level=2 --group-directories-first' 
-alias lT='exa -T --git-ignore --level=4 --group-directories-first'
-alias t='exa --tree --level=2 --long'
+alias ls='eza'
+alias l='eza -l --all --group-directories-first --git'
+alias ll='eza -l --all --all --group-directories-first --git'
+alias lt='eza -T --git-ignore --level=2 --group-directories-first'
+alias llt='eza -lT --git-ignore --level=2 --group-directories-first' 
+alias lT='eza -T --git-ignore --level=4 --group-directories-first'
+alias t='eza --tree --level=2 --long'
 #rust
 alias crg_run='cargo build && cargo run'
 
 #clang
-alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias cclg_run='f(){ clang -Wall -o testc "$@" -std=c11 -lm -fuse-ld=lld && ./testc; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f' 
+alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f' 
 alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
+#clang-format
+alias clgf='clang-format --style=Google --dump-config > .clang-format'
+
+#gcc
+alias glg_run='f() {g++ -Wall -o test "$@" -std=c++2a && ./test; unset -f f;}; f'
 
 #docker
 alias dcu='docker-compose up -d'
