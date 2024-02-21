@@ -1,0 +1,14 @@
+[user]
+	name = cppshizoid
+	email = alex.krivoschecov@gmail.com
+[credential]
+	credentialStore = gpg
+[core]
+	autocrlf = input
+	editor = nvim
+[init]
+	defaultBranch = master
+[alias]
+	hist = log --oneline --decorate --graph --all
+[merge]
+	conflictstyle = diff3
