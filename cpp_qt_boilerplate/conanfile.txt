@@ -1,6 +1,6 @@
 [requires]
 doxygen/1.9.4
-qt/6.4.1
+qt/6.6.1
 
 [generators]
 cmake
