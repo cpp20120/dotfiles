@@ -16,12 +16,19 @@ set(CMAKE_PREFIX_PATH "")
 # FindThreads.cmake fix
 set(CMAKE_THREAD_LIBS_INIT "-lpthread")
 
-find_package(Qt6 COMPONENTS Core Gui Widgets REQUIRED)
+find_package(Qt6 COMPONENTS Core Gui Quick Widgets REQUIRED)
 
 include_directories(include)
+# qml and images
+qt_add_qml_module(myapp
+    URI hello
+    QML_FILES
+        main.qml
+    RESOURCES
+        img/world.png
+)
 
-
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} app.qrc main.cpp)
 target_link_libraries(${PROJECT_NAME} Qt::Core Qt::Gui Qt::Widgets)
 
 if (DEBUG)
