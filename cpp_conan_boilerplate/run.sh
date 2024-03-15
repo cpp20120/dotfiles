@@ -2,10 +2,10 @@
 # Проверка типа дистрибутива
 if [ -x "$(command -v apt-get)" ]; then
     sudo apt-get update
-    sudo apt-get install -y build-essential neofetch git clang clang-tools gcc cmake ninja-build lld lldb valgrind python3-pip doxygen neovim
+    sudo apt-get install -y build-essential neofetch git clang clang-tools clang-format gcc cmake ninja-build lld lldb valgrind gtest python3-pip doxygen neovim
 
 elif [ -x "$(command -v dnf)" ]; then
-    sudo dnf install -y @development-tools neofetch git clang clang-tools-extra gcc cmake ninja-build lld lldb valgrind python3-pip doxygen neovim
+    sudo dnf install -y @development-tools neofetch git clang clang-tools-extra gcc cmake ninja-build lld lldb valgrind gtest python3-pip doxygen neovim
 
 
 else
@@ -25,7 +25,7 @@ rm -rf build
 
 conan install . --output-folder=build --build=missing
 cd build
-cmake .. -G Ninja -DCMAKE_TOOLCHAIN_FILE=conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release
+cmake .. -G Ninja -DCMAKE_BUILD_TYPE=Release
 cmake --build .
 ./test
 
