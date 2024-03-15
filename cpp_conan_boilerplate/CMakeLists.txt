@@ -49,6 +49,10 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILE})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_compile_options(${PROJECT_NAME} PRIVATE Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g)
 
+add_subdirectory(lib)
+
+# Link your main project with the library
+target_link_libraries(${PROJECT_NAME} lib)
 
 #Use in graphics projects
 ############## Build SHADERS #######################
