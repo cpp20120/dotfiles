@@ -5,6 +5,8 @@
 │   └── Doxyfile.in  
 ├── include
 │   └── *.hpp
+├── lib
+|   └── CMakeLists.txt
 │── shaders(for graphics project)
 │   └── *.frag/.vert
 ├── src
