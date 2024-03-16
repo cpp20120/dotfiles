@@ -36,12 +36,6 @@ find_package(Boost)
 find_package(glfw3)
 find_package(glm)
 
-if(NOT WIN32)
-  target_link_libraries(${PROJECT_NAME} boost::system pthread)
-else()
-  # Windows WIN32 API
-  target_link_libraries(${PROJECT_NAME} boost::system)
-endif()
 
 #Target Configurations
 file(GLOB SOURCE_FILE src/*.cpp)
@@ -57,6 +51,13 @@ target_link_libraries(${PROJECT_NAME} lib)
 # Link libs with target
 target_link_libraries(${PROJECT_NAME} glm::glm)
 target_link_libraries(${PROJECT_NAME} glfw)
+# boost
+if(NOT WIN32)
+  target_link_libraries(${PROJECT_NAME} boost::system pthread)
+else()
+  # Windows WIN32 API
+  target_link_libraries(${PROJECT_NAME} boost::system)
+endif()
 
 
 #Use in graphics projects
