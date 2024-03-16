@@ -1,4 +1,4 @@
-# Define your library target and properties
+# Define library target and properties
 file(GLOB SOURCE_FILE src/*.cpp)
 add_library(LibraryTargetName ${SOURCE_FILE})
 
