@@ -31,15 +31,16 @@ function(copy_after_build TARGET_NAME)
 endfunction()
 
 
-# Find Packages 
-
+# Find Packages conan
 find_package(Boost)
+find_package(glfw3)
+find_package(glm)
 
 if(NOT WIN32)
-  target_link_libraries(${PROJECT_NAME} Boost::system pthread)
+  target_link_libraries(${PROJECT_NAME} boost::system pthread)
 else()
   # Windows WIN32 API
-  target_link_libraries(${PROJECT_NAME} Boost::system)
+  target_link_libraries(${PROJECT_NAME} boost::system)
 endif()
 
 #Target Configurations
@@ -51,8 +52,12 @@ target_compile_options(${PROJECT_NAME} PRIVATE Wall -Wextra -Wpedantic -fsanitiz
 
 add_subdirectory(lib)
 
-# Link your main project with the library
+# Link  main project with the library
 target_link_libraries(${PROJECT_NAME} lib)
+# Link libs with target
+target_link_libraries(${PROJECT_NAME} glm::glm)
+target_link_libraries(${PROJECT_NAME} glfw)
+
 
 #Use in graphics projects
 ############## Build SHADERS #######################
