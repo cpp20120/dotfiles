@@ -13,7 +13,7 @@ RUN apk update && apk --no-cache --upgrade add tzdata \
     && echo $TZ > /etc/timezone
 
 RUN apk --no-cache --upgrade add \
-    sudo curl wget cmake make pkgconfig git gcc g++ \
+    sudo curl wget cmake make pkgconfig git gcc g++ clang clang++ \
     openssl libressl-dev jsoncpp-dev util-linux-dev zlib-dev c-ares-dev \
     postgresql-dev mariadb-dev sqlite-dev hiredis-dev
 
@@ -29,8 +29,8 @@ WORKDIR $USER_HOME
 ENV LANG=en_US.UTF-8 \
     LANGUAGE=en_US:en \
     LC_ALL=en_US.UTF-8 \
-    CC=gcc \
-    CXX=g++ \
+    CC=clang \
+    CXX=clang++ \
     AR=gcc-ar \
     RANLIB=gcc-ranlib \
     DROGON_INSTALLED_ROOT=$USER_HOME/install
