@@ -1,28 +1,28 @@
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
-from PIL import Image
 import os
+import img2pdf
+import sys
 
+if len(sys.argv) != 2:
+    print("Usage: python convert_images_to_pdf.py <directory_path>")
+    sys.exit(1)
 
-def convert_images_to_pdf(images_path, output_pdf):
-    c = canvas.Canvas(output_pdf, pagesize=letter)
+directory_path = sys.argv[1]
 
-    images = [img for img in os.listdir(
-        images_path) if img.endswith(".jpg") or img.endswith(".png")]
+if not os.path.isdir(directory_path):
+    print(f"Error: The specified directory '{directory_path}' does not exist.")
+    sys.exit(1)
 
-    for image_name in images:
-        img_path = os.path.join(images_path, image_name)
-        img = Image.open(img_path)
-        c.setPageSize((img.width, img.height))
-        c.drawImage(img_path, 0, 0, width=img.width, height=img.height)
-        c.showPage()
+image_files = [os.path.join(directory_path, i) for i in os.listdir(directory_path) if any(i.lower().endswith(ext) for ext in (".jpg", ".png"))]
 
-    c.save()
+if not image_files:
+    print(f"No JPEG or PNG images found in the directory '{directory_path}'.")
+    sys.exit(1)
 
+pdf_data = img2pdf.convert(image_files)
 
-# Path to the directory with images
-images_directory = "path_to_images_directory"
-# Output PDF file name
-output_pdf_file = "output.pdf"
+output_pdf_path = "output.pdf"
 
-convert_images_to_pdf(images_directory, output_pdf_file)
+with open(output_pdf_path, "wb") as file:
+    file.write(pdf_data)
+
+print(f"Images converted to PDF. Output PDF saved as '{output_pdf_path}'.")
