@@ -28,7 +28,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # zstyle ':omz:update' mode disabled  # disable automatic updates
  zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-# Uncomment the following line to change how often to auto-update (in days).
+# Uncomment the following line to change how often thttps://youtu.be/cKxs5gUjl5A?t=490o auto-update (in days).
 # zstyle ':omz:update' frequency 13
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -64,8 +64,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf rust tmux ansible dotnet kubectl mvn gradle npm history systemd jsontools sudo copyfile copybuffer thefuck fzf-z fzf-zsh-plugin) 
-#alt+c directory search 
+plugins=(git fzf zsh-autosuggestions rust tmux ansible dotnet kubectl mvn gradle npm history systemd jsontools sudo dnf copyfile copybuffer thefuck vscode)
+#alt+c directory search
 #ctrl+r history search
 #ctrl+t file search
 source $ZSH/oh-my-zsh.sh
@@ -85,8 +85,9 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/vulkan${PATH:+:$PATH}
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
+export ARCHFLAGS="-arch x86_64 -fuse-ld=lld"
+export CC=clang
+export CXX=clang++
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -114,9 +115,12 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias to=". gotodir"
 
-alias weather='~/Scripts/weather.sh'
+alias weather="~/Scripts/weather.sh"
 alias rfv='~/Scripts/rfv.zsh'
+alias rfc='~/Scripts/rfc.zsh'
+alias rfg='~/Scripts/fzf-git.zsh'
 alias dnff='~/Scripts/dnf.sh'
+alias flf='go-flatpak'
 #mounted devices
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 
@@ -129,7 +133,7 @@ alias datagrip= '~/.local/share/JetBrains/Toolbox/scripts/datagrip'
 alias androidstudio= '~/.local/share/JetBrains/Toolbox/scripts/studio'
 
 #nvitop
-alias nvitop='pipx run nvitop' 
+alias nvitop='pipx run nvitop'
 
 #docker
 alias docstats='docker stats $(docker ps -q)'                                  # stats on images
@@ -144,7 +148,7 @@ alias ls='eza'
 alias l='eza -l --all --group-directories-first --git'
 alias ll='eza -l --all --all --group-directories-first --git'
 alias lt='eza -T --git-ignore --level=2 --group-directories-first'
-alias llt='eza -lT --git-ignore --level=2 --group-directories-first' 
+alias llt='eza -lT --git-ignore --level=2 --group-directories-first'
 alias lT='eza -T --git-ignore --level=4 --group-directories-first'
 alias t='eza --tree --level=2 --long'
 #rust
@@ -152,9 +156,9 @@ alias crg_run='cargo build && cargo run'
 
 #clang
 alias cclg_run='f(){ clang -Wall -o testc "$@" -std=c11 -lm -fuse-ld=lld && ./testc; unset -f f;}; f'
-alias clg_dbg='f(){ clang++ -g -Wall -Wextra -Werror -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f' 
-alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++20 -fuse-ld=lld && ./test; unset -f f;}; f' 
-alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2b -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ -g -Wall -Wextra -Werror -o test "$@" -std=c++23 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++23 -fuse-ld=lld && ./test; unset -f f;}; f'
+alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2c -fuse-ld=lld && ./test; unset -f f;}; f'
 #clang-format
 alias clgf='clang-format --style=Google --dump-config > .clang-format'
 
@@ -200,7 +204,7 @@ alias dtu='dotnet tool uninstall'
 alias dtup='dotnet tool update'
 alias nuget='dotnet nuget'
 
-#python 
+#python
 alias pipi='pip install'
 alias p='python'
 alias up='python -m pip install --upgrade pip'
@@ -225,7 +229,7 @@ alias colima='/usr/local/bin/colima-Linux-x86_64'
 alias dnfi="sudo dnf5 install"
 alias fli="flatpak install"
 alias flu="flatpak update"
-alias update="sudo dnf5 update -y; flatpak update"
+alias update="sudo dnf5 update -y; flatpak update; zinit update"
 
 #extract archives
 extract () {
@@ -273,12 +277,14 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 #zinit plugins
+zinit light marlonrichert/zsh-autocomplete
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light junegunn/fzf
 zinit light z-shell/zsh-zoxide
 zinit load ellie/atuin
 zinit ice depth=1; zplugin light romkatv/powerlevel10k
+zinit light Aloxaf/fzf-tab
 zinit light darvid/zsh-poetry
 #zplug
 #
@@ -286,6 +292,7 @@ source ~/.zplug/init.zsh
 
 zplug "changyuheng/fz", defer:1
 zplug "rupa/z", use:z.sh
+zplug "chitoku-k/fzf-zsh-completions"
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
@@ -307,28 +314,89 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-patch-dl \
     zdharma-continuum/zinit-annex-rust
 
-#cargo 
-export PATH=$PATH:/home/cppshidoiz/.cargo/bin
+#fzf-tab
+zstyle ':completion:*' fzf-search-display true
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# switch group using `<` and `>`
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+#cargo
+export PATH=$PATH:/home/cppshizoid/.cargo/bin
 #go
-export PATH=$PATH:/home/cppshidoiz/go/bin
+export PATH=$PATH:/home/cppshizoid/go/bin
 #dotnet
 export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 #vcpkg
 export VCPKG_ROOT=/usr/bin/vcpkg
-
+export PATH=$VCPKG_ROOT:$PATH
 #ninja
 export CMAKE_GENERATOR=Ninja
 
+#fzf
+# Print tree structure in the preview window
+export FZF_ALT_C_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'tree -C {}'"
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='**'
+
+# Options to fzf command
+export FZF_COMPLETION_OPTS='--border --info=inline'
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'tree -C {} | head -200'   "$@" ;;
+    export|unset) fzf --preview "eval 'echo \$'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview 'bat -n --color=always {}' "$@" ;;
+  esac
+}
+
+_fzf_and_run_windget() {
+  _fzf_comprun
+  zle accept-line
+}
+zle -N         fzf-and-run-widget
+bindkey '^[^I' fzf-and-run-widget
+
 #gradle
-export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
+#export PATH=$PATH:/opt/gradle/gradle-8.2.1/bin
 
 #sdkman
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+#export SDKMAN_DIR="$HOME/.sdkman"
+#[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 #docker-composev2
 #export PATH=
 #docker-rootless
-export PATH=/home/cppshidoiz/bin:$PATH
+export PATH=/home/cppshizoid/bin:$PATH
 export DOCKER_HOST=unix:///run/user/1000/docker.sock
 #deno
 export DENO_INSTALL="/home/cppshizoid/.deno"
@@ -348,14 +416,14 @@ IFS=: read -ra selected < <(
 
 # Searches only from flathub repository
 # CLR=$(for i in {0..7}; do echo "tput setaf $i"; done)
-BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4); 
-MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);    
+BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4);
+MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);
 
 AWK_VAR="awk -v BLK=${BLK} -v RED=${RED} -v GRN=${GRN} -v YLW=${YLW} -v BLU=${BLU} -v MGN=${MGN} -v CYN=${CYN} -v WHT=${WHT} -v BLD=${BLD} -v RST=${RST}"
 
 # CLR=$(for i in {0..7}; do echo "tput setaf $i"; done)
-BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4); 
-MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);    
+BLK=\$(tput setaf 0); RED=\$(tput setaf 1); GRN=\$(tput setaf 2); YLW=\$(tput setaf 3); BLU=\$(tput setaf 4);
+MGN=\$(tput setaf 5); CYN=\$(tput setaf 6); WHT=\$(tput setaf 7); BLD=\$(tput bold); RST=\$(tput sgr0);
 
 AWK_VAR="awk -v BLK=${BLK} -v RED=${RED} -v GRN=${GRN} -v YLW=${YLW} -v BLU=${BLU} -v MGN=${MGN} -v CYN=${CYN} -v WHT=${WHT} -v BLD=${BLD} -v RST=${RST}"
 
@@ -364,9 +432,9 @@ fzf-flatpak-install-widget() {
   flatpak remote-ls flathub --cached --columns=app,name,description \
   | awk -v cyn=$(tput setaf 6) -v blu=$(tput setaf 4) -v bld=$(tput bold) -v res=$(tput sgr0) \
   '{
-    app_info=""; 
+    app_info="";
     for(i=2;i<=NF;i++){
-      app_info=cyn app_info" "$i 
+      app_info=cyn app_info" "$i
     };
     print blu bld $2" -" res app_info "|" $1
     }' \
@@ -380,7 +448,7 @@ fzf-flatpak-install-widget() {
     --bind "enter:execute(flatpak install flathub {-1})" # when pressed enter it doesn't showing the key pressed but it is reading the input
   zle reset-prompt
 }
-bindkey '^[f' fzf-flatpak-install-widget #alt-f 
+bindkey '^[f' fzf-flatpak-install-widget #alt-f
 zle -N fzf-flatpak-install-widget
 
 fzf-flatpak-uninstall-widget() {
@@ -406,12 +474,12 @@ fzf-flatpak-uninstall-widget() {
     --bind "alt-r:change-prompt(Run > )+execute-silent(touch /tmp/run && rm -r /tmp/uns)" \
     --bind "alt-u:change-prompt(Uninstall > )+execute-silent(touch /tmp/uns && rm -r /tmp/run)" \
     --bind "enter:execute(
-    if [ -f /tmp/uns ]; then 
-      flatpak uninstall {3}; 
+    if [ -f /tmp/uns ]; then
+      flatpak uninstall {3};
     elif [ -f /tmp/run ]; then
-      flatpak run {3}; 
+      flatpak run {3};
     fi
-    )" # same as the install one but when pressed  entered the message is something like this 
+    )" # same as the install one but when pressed  entered the message is something like this
 # "Proceed with these changes to the system installation? [Y/n]:" but it will uninstall the selected app weird but idk y
   rm -f /tmp/{uns,run} &> /dev/null
   zle reset-prompt
@@ -512,7 +580,7 @@ if tmp_file="$(mktemp --tmpdir "${basename}".XXXXXX)"; then
 	--marker=' ' \
 	--preview-window='right,67%,wrap' \
 	--preview="${INS_PRVW} {1}" \
-	--bind="enter:execute(if grep -q 'in' \"${tmp_file}\"; then sudo dnf install {+}; 
+	--bind="enter:execute(if grep -q 'in' \"${tmp_file}\"; then sudo dnf install {+};
         elif grep -q 'rm' \"${tmp_file}\"; then sudo dnf remove {+}; \
         elif grep -q 'up' \"${tmp_file}\"; then sudo dnf upgrade {+}; fi; \
         read -s -r -n1 -p $'\n${BLUE}Press any key to continue...' && printf '\n')" \
@@ -523,7 +591,7 @@ if tmp_file="$(mktemp --tmpdir "${basename}".XXXXXX)"; then
 	--bind="alt-m:execute(sudo dnf makecache;read -s -r -n1 -p $'\n${BLUE}Press any key to continue...' && printf '\n')" \
 	--bind="alt-?:preview(printf \"${fhelp[0]}\")" \
 	--bind="ctrl-a:select-all"
-    
+
     rm -f "${tmp_file}" &> /dev/null
 else
     printf 'Error: Failed to create tmp file. $TMPDIR (or /tmp if $TMPDIR is unset) may not be writable.\n' >&2
@@ -558,7 +626,8 @@ fzf-conda-activate () {
 }
 zle -N fzf-flatpak-uninstall-widget
 zinit load ellie/atuin
-### End of Zinit's installer chunk
+# End of Zinit's installer chunk
+
 export ATUIN_SESSION=$(atuin uuid)
 export ATUIN_HISTORY="atuin history list"
 _atuin_preexec(){
@@ -596,29 +665,20 @@ fi
 eval "$(zoxide init zsh)"
 eval "$(atuin init zsh)"
 eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+autoload -Uz compinit
+compinit
+
+# run
+# add the line to your '.zshrc' file if it is useful for your case
+compdef _gnu_generic fzf
 autoload bashcompinit
 bashcompinit
 source /usr/bin/scripts/vcpkg_completion.zsh
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cppshizoid/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/cppshizoid/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cppshizoid/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
