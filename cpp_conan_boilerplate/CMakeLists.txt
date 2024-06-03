@@ -1,14 +1,19 @@
 cmake_minimum_required(VERSION 3.26)
 project(${PROJECT_NAME} LANGUAGES CXX) #change ${PROJECT_NAME} to actual projet name only in project()
 
+# standart
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
+# export compile commands for vscode/nvim
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-#lld 
-set(CMAKE_EXE_LINKER_FLAGS -fuse-ld=lld)
+#lld
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
 
+#lto
+set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
+
+# find include-what-you-use
 find_program(IWYU_PROGRAM NAMES include-what-you-use) # https://github.com/include-what-you-use/include-what-you-use
 if(IWYU_PROGRAM)
   set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${IWYU_PROGRAM})
@@ -19,7 +24,7 @@ if (DOCS)
     add_subdirectory(docs)
 endif()
 
-#  Functions
+# Function to copy target after build
 function(copy_after_build TARGET_NAME)
   set(DESTDIR ${CMAKE_CURRENT_LIST_DIR}/bin/)
   file(MAKE_DIRECTORY ${DESTDIR})
@@ -30,27 +35,31 @@ function(copy_after_build TARGET_NAME)
     COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${TARGET_NAME}> ${DESTDIR})
 endfunction()
 
-
-# Find Packages conan
-find_package(Boost)
-find_package(glfw3)
-find_package(glm)
-
+# Find packages conan
+find_package(Boost REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(glm REQUIRED)
 
 #Target Configurations
-file(GLOB SOURCE_FILE src/*.cpp)
-add_executable(${PROJECT_NAME} ${SOURCE_FILE})
+file(GLOB SOURCE_FILES src/*.cpp)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
+# add include forlder with header and compile options
 target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_compile_options(${PROJECT_NAME} PRIVATE Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g)
 
+# compile options for debug and release
+target_compile_options(${PROJECT_NAME} PRIVATE
+  $<$<CONFIG:DEBUG>:-Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g>
+  $<$<CONFIG:RELEASE>:-O3 -flto -Wall>
+)
+
+# add subdirectory for libraries
 add_subdirectory(lib)
 
-# Link  main project with the library
-target_link_libraries(${PROJECT_NAME} lib)
-# Link libs with target
+# link main project with libraries
 target_link_libraries(${PROJECT_NAME} glm::glm)
 target_link_libraries(${PROJECT_NAME} glfw)
+
 # boost
 if(NOT WIN32)
   target_link_libraries(${PROJECT_NAME} boost::system pthread)
@@ -59,16 +68,15 @@ else()
   target_link_libraries(${PROJECT_NAME} boost::system)
 endif()
 
-
 #Use in graphics projects
 ############## Build SHADERS #######################
-find_program(GLSL_VALIDATOR glslangValidator HINTS 
-  ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE} 
-  /usr/bin 
-  /usr/local/bin 
+find_program(GLSL_VALIDATOR glslangValidator HINTS
+  ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE}
+  /usr/bin
+  /usr/local/bin
   ${VULKAN_SDK_PATH}/Bin
   ${VULKAN_SDK_PATH}/Bin32
-  $ENV{VULKAN_SDK}/Bin/ 
+  $ENV{VULKAN_SDK}/Bin/
   $ENV{VULKAN_SDK}/Bin32/
 )
 
@@ -92,3 +100,5 @@ add_custom_target(
     Shaders
     DEPENDS ${SPIRV_BINARY_FILES}
 )
+# add shaders as dependency to the main target
+add_dependencies(${PROJECT_NAME} Shaders)
