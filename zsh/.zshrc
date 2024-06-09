@@ -85,7 +85,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/vulkan${PATH:+:$PATH}
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64 -fuse-ld=lld"
+export ARCHFLAGS="-arch x86_64 -fuse-ld=mold"
 export CC=clang
 export CXX=clang++
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -155,10 +155,10 @@ alias t='eza --tree --level=2 --long'
 alias crg_run='cargo build && cargo run'
 
 #clang
-alias cclg_run='f(){ clang -Wall -o testc "$@" -std=c11 -lm -fuse-ld=lld && ./testc; unset -f f;}; f'
-alias clg_dbg='f(){ clang++ -g -Wall -Wextra -Werror -o test "$@" -std=c++23 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++23 -fuse-ld=lld && ./test; unset -f f;}; f'
-alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2c -fuse-ld=lld && ./test; unset -f f;}; f'
+alias cclg_run='f(){ clang -Wall -o testc "$@" -std=c11 -lm -fuse-ld=mold && ./testc; unset -f f;}; f'
+alias clg_dbg='f(){ clang++ -g -Wall -Wextra -Werror -o test "$@" -std=c++23 -fuse-ld=mold && ./test; unset -f f;}; f'
+alias clg_run='f(){ clang++ -Wall -o test "$@" -std=c++23 -fuse-ld=mold && ./test; unset -f f;}; f'
+alias clg_tst='f(){ clang++ -Wall -Wextra -Werror -o test "$@" -std=c++2c -fuse-ld=mold && ./test; unset -f f;}; f'
 #clang-format
 alias clgf='clang-format --style=Google --dump-config > .clang-format'
 
