@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.26)
-project(${PROJECT_NAME} LANGUAGES CXX) #change ${PROJECT_NAME} to actual projet name only in project()
+project(${PROJECT_NAME} LANGUAGES CXX) # change ${PROJECT_NAME} to actual projet
+# name only in project()
 
 # standart
 set(CMAKE_CXX_STANDARD 23)
@@ -7,21 +8,22 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # export compile commands for vscode/nvim
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-#lld
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=lld")
+# lld
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=mold")
 
-#lto
+# lto
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE)
 
 # find include-what-you-use
-find_program(IWYU_PROGRAM NAMES include-what-you-use) # https://github.com/include-what-you-use/include-what-you-use
+find_program(IWYU_PROGRAM NAMES include-what-you-use
+)# https://github.com/include-what-you-use/include-what-you-use
 if(IWYU_PROGRAM)
   set(CMAKE_CXX_INCLUDE_WHAT_YOU_USE ${IWYU_PROGRAM})
 endif()
 
-#doxygen
-if (DOCS)
-    add_subdirectory(docs)
+# doxygen
+if(DOCS)
+  add_subdirectory(docs)
 endif()
 
 # Function to copy target after build
@@ -40,7 +42,7 @@ find_package(Boost REQUIRED)
 find_package(glfw3 REQUIRED)
 find_package(glm REQUIRED)
 
-#Target Configurations
+# Target Configurations
 file(GLOB SOURCE_FILES src/*.cpp)
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
@@ -48,10 +50,21 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 
 # compile options for debug and release
-target_compile_options(${PROJECT_NAME} PRIVATE
-  $<$<CONFIG:DEBUG>:-Wall -Wextra -Wpedantic -fsanitize=address -fsanitize=undefined -fsanitize=thread -fPIE -pie -fno-omit-frame-pointer -g>
-  $<$<CONFIG:RELEASE>:-O3 -flto -Wall>
-)
+target_compile_options(
+  ${PROJECT_NAME}
+  PRIVATE $<$<CONFIG:DEBUG>:-Wall
+          -Wextra
+          -Wpedantic
+          -fsanitize=address
+          -fsanitize=undefined
+          -fsanitize=thread
+          -fPIE
+          -pie
+          -fno-omit-frame-pointer
+          -g>
+          $<$<CONFIG:RELEASE>:-O3
+          -flto
+          -Wall>)
 
 # add subdirectory for libraries
 add_subdirectory(lib)
@@ -68,23 +81,20 @@ else()
   target_link_libraries(${PROJECT_NAME} boost::system)
 endif()
 
-#Use in graphics projects
-############## Build SHADERS #######################
-find_program(GLSL_VALIDATOR glslangValidator HINTS
-  ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE}
-  /usr/bin
-  /usr/local/bin
-  ${VULKAN_SDK_PATH}/Bin
-  ${VULKAN_SDK_PATH}/Bin32
-  $ENV{VULKAN_SDK}/Bin/
-  $ENV{VULKAN_SDK}/Bin32/
-)
+# Use in graphics projects # ############ Build SHADERS #######################
+find_program(
+  GLSL_VALIDATOR glslangValidator
+  HINTS ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE}
+        /usr/bin
+        /usr/local/bin
+        ${VULKAN_SDK_PATH}/Bin
+        ${VULKAN_SDK_PATH}/Bin32
+        $ENV{VULKAN_SDK}/Bin/
+        $ENV{VULKAN_SDK}/Bin32/)
 
 # get all .vert and .frag files in shaders directory
-file(GLOB_RECURSE GLSL_SOURCE_FILES
-  "${PROJECT_SOURCE_DIR}/shaders/*.frag"
-  "${PROJECT_SOURCE_DIR}/shaders/*.vert"
-)
+file(GLOB_RECURSE GLSL_SOURCE_FILES "${PROJECT_SOURCE_DIR}/shaders/*.frag"
+     "${PROJECT_SOURCE_DIR}/shaders/*.vert")
 
 foreach(GLSL ${GLSL_SOURCE_FILES})
   get_filename_component(FILE_NAME ${GLSL} NAME)
@@ -96,9 +106,6 @@ foreach(GLSL ${GLSL_SOURCE_FILES})
   list(APPEND SPIRV_BINARY_FILES ${SPIRV})
 endforeach(GLSL)
 
-add_custom_target(
-    Shaders
-    DEPENDS ${SPIRV_BINARY_FILES}
-)
+add_custom_target(Shaders DEPENDS ${SPIRV_BINARY_FILES})
 # add shaders as dependency to the main target
 add_dependencies(${PROJECT_NAME} Shaders)
