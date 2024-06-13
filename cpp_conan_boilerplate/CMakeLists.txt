@@ -7,6 +7,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # export compile commands for vscode/nvim
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+# configurations
+set(CMAKE_CONFIGURATION_TYPES
+    "Debug;Release;RelWithDebInfo;MinSizeRel"
+    CACHE STRING "" FORCE)
 
 # lld
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=mold")
@@ -24,6 +28,13 @@ endif()
 # doxygen
 if(DOCS)
   add_subdirectory(docs)
+endif()
+
+# caching on ci
+find_program(CCACHE_PROGRAM ccache)
+if(CCACHE_PROGRAM)
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ${CCACHE_PROGRAM})
+  set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ${CCACHE_PROGRAM})
 endif()
 
 # Function to copy target after build
@@ -81,7 +92,23 @@ else()
   target_link_libraries(${PROJECT_NAME} boost::system)
 endif()
 
-# Use in graphics projects # ############ Build SHADERS #######################
+find_program(CLANG_FORMAT "clang-format")
+if(CLANG_FORMAT)
+  add_custom_target(format COMMAND ${CLANG_FORMAT} -i ${SOURCE_FILES})
+endif()
+
+find_program(CLANG_TIDY "clang-tidy")
+if(CLANG_TIDY)
+  set(CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY}")
+endif()
+
+find_program(CPPCHECK "cppcheck")
+if(CPPCHECK)
+  set(CMAKE_CXX_CPPCHECK "${CPPCHECK}")
+endif()
+
+#Use in graphics projects
+############## Build SHADERS #######################
 find_program(
   GLSL_VALIDATOR glslangValidator
   HINTS ${Vulkan_GLSLANG_VALIDATOR_EXECUTABLE}
