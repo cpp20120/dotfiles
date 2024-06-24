@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Ranges</Title>
+      <Shortcut>ranges</Shortcut>
+      <Description>Snippet for using ranges in C++20</Description>
+      <Author>cppshizoid</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>RangeName</ID>
+          <ToolTip>Range Name</ToolTip>
+          <Default>range</Default>
+        </Literal>
+        <Literal>
+          <ID>Collection</ID>
+          <ToolTip>Collection Name</ToolTip>
+          <Default>collection</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[
+#include <ranges>
+
+auto $RangeName$ = $Collection$ | std::views::filter([](const auto& item) {
+    return true; // Condition
+}) | std::views::transform([](const auto& item) {
+    return item; // Transformation
+});
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
