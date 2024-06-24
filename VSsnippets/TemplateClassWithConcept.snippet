@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Template Class with Concept</Title>
+      <Shortcut>tplclassconcept</Shortcut>
+      <Description>Snippet for creating a template class with concept</Description>
+      <Author>cppshizoid</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>TypeName</ID>
+          <ToolTip>Type Name</ToolTip>
+          <Default>MyType</Default>
+        </Literal>
+        <Literal>
+          <ID>ConceptName</ID>
+          <ToolTip>Concept Name</ToolTip>
+          <Default>MyConcept</Default>
+        </Literal>
+        <Literal>
+          <ID>ClassName</ID>
+          <ToolTip>Class Name</ToolTip>
+          <Default>MyClass</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[
+template<typename $TypeName$> requires $ConceptName$<$TypeName$>
+class $ClassName$ {
+public:
+    $ClassName$();
+    ~$ClassName$();
+
+    void someFunction();
+};
+
+template<typename $TypeName$> requires $ConceptName$<$TypeName$>
+$ClassName$<$TypeName$>::$ClassName$() {
+    // Constructor implementation
+}
+
+template<typename $TypeName$> requires $ConceptName$<$TypeName$>
+$ClassName$<$TypeName$>::~$ClassName$() {
+    // Destructor implementation
+}
+
+template<typename $TypeName$> requires $ConceptName$<$TypeName$>
+void $ClassName$<$TypeName$>::someFunction() {
+    // Function implementation
+}
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
