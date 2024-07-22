@@ -30,6 +30,15 @@
       </Declarations>
       <Code Language="cpp">
         <![CDATA[
+#include <concepts>
+
+// Define the concept
+template<typename T>
+concept $ConceptName$ = requires(T a) {
+    { a.someMethod() } -> std::same_as<void>;
+};
+
+// Define the class template with concept
 template<typename $TypeName$> requires $ConceptName$<$TypeName$>
 class $ClassName$ {
 public:
