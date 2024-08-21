@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for Matrix -->
+	<Type Name="Matrix&lt;*&gt;">
+		<DisplayString>{{rows = {rows}, cols = {cols}}}</DisplayString>
+		<Expand>
+			<Item Name="Rows">rows</Item>
+			<Item Name="Cols">cols</Item>
+			<ArrayItems>
+				<Size>rows * cols</Size>
+				<ValuePointer>data</ValuePointer>
+				<IndexList>
+					<Index>[$i / cols][$i % cols]</Index>
+				</IndexList>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

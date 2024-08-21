@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for QString -->
+	<Type Name="QString">
+		<DisplayString>{{length = {d->size}, text = {d->data}}}</DisplayString>
+		<Expand>
+			<Item Name="Length">d->size</Item>
+			<Item Name="Text">d->data</Item>
+			<StringView>reinterpret_cast&lt;const wchar_t*&gt;(d->data)</StringView>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

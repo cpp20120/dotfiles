@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for QList -->
+	<Type Name="QList&lt;*&gt;">
+		<DisplayString>{{size = {d->end - d->begin}}}</DisplayString>
+		<Expand>
+			<Item Name="Size">d->end - d->begin</Item>
+			<ArrayItems>
+				<Size>d->end - d->begin</Size>
+				<ValuePointer>d->begin</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

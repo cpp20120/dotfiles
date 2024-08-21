@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for VkPhysicalDeviceProperties -->
+	<Type Name="VkPhysicalDeviceProperties">
+		<DisplayString>{{deviceName = {deviceName}, apiVersion = {apiVersion}}}</DisplayString>
+		<Expand>
+			<Item Name="Device Name">deviceName</Item>
+			<Item Name="API Version">apiVersion</Item>
+			<Item Name="Driver Version">driverVersion</Item>
+			<Item Name="Vendor ID">vendorID</Item>
+			<Item Name="Device ID">deviceID</Item>
+			<Item Name="Device Type">deviceType</Item>
+			<Item Name="Limits">limits</Item>
+			<Item Name="Sparse Properties">sparseProperties</Item>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>
