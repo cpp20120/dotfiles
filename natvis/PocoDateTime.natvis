@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="Poco::DateTime">
+    <DisplayString>{Year}/{Month}/{Day} {Hour}:{Minute}:{Second}.{Millisecond}</DisplayString>
+    <Expand>
+      <Item Name="Year">m_utcTime.Year()</Item>
+      <Item Name="Month">m_utcTime.Month()</Item>
+      <Item Name="Day">m_utcTime.Day()</Item>
+      <Item Name="Hour">m_utcTime.Hour()</Item>
+      <Item Name="Minute">m_utcTime.Minute()</Item>
+      <Item Name="Second">m_utcTime.Second()</Item>
+      <Item Name="Millisecond">m_utcTime.Millisecond()</Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>

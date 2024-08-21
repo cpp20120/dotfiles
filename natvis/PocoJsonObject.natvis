@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="Poco::JSON::Object">
+    <DisplayString>JSON Object with {names_.size()} elements</DisplayString>
+    <Expand>
+      <Item Name="Elements">
+        <ArrayItems>
+          <Size>names_.size()</Size>
+          <ValuePointer>values_</ValuePointer>
+        </ArrayItems>
+      </Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>
