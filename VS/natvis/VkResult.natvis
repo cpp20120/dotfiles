@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for VkResult -->
+	<Type Name="VkResult">
+		<DisplayString Condition="HRESULT == 0">{"VK_SUCCESS"}</DisplayString>
+		<DisplayString Condition="HRESULT == 1">{"VK_NOT_READY"}</DisplayString>
+		<DisplayString Condition="HRESULT == 2">{"VK_TIMEOUT"}</DisplayString>
+		<DisplayString Condition="HRESULT == 3">{"VK_EVENT_SET"}</DisplayString>
+		<DisplayString Condition="HRESULT == 4">{"VK_EVENT_RESET"}</DisplayString>
+		<DisplayString Condition="HRESULT == 5">{"VK_INCOMPLETE"}</DisplayString>
+		<DisplayString Condition="HRESULT == -1">{"VK_ERROR_OUT_OF_HOST_MEMORY"}</DisplayString>
+		<DisplayString Condition="HRESULT == -2">{"VK_ERROR_OUT_OF_DEVICE_MEMORY"}</DisplayString>
+		<DisplayString Condition="HRESULT == -3">{"VK_ERROR_INITIALIZATION_FAILED"}</DisplayString>
+		<DisplayString Condition="HRESULT == -4">{"VK_ERROR_DEVICE_LOST"}</DisplayString>
+		<DisplayString Condition="HRESULT == -5">{"VK_ERROR_MEMORY_MAP_FAILED"}</DisplayString>
+		<DisplayString Condition="HRESULT == -6">{"VK_ERROR_LAYER_NOT_PRESENT"}</DisplayString>
+		<DisplayString Condition="HRESULT == -7">{"VK_ERROR_EXTENSION_NOT_PRESENT"}</DisplayString>
+		<DisplayString Condition="HRESULT == -8">{"VK_ERROR_FEATURE_NOT_PRESENT"}</DisplayString>
+		<DisplayString Condition="HRESULT == -9">{"VK_ERROR_INCOMPATIBLE_DRIVER"}</DisplayString>
+		<DisplayString Condition="HRESULT == -10">{"VK_ERROR_TOO_MANY_OBJECTS"}</DisplayString>
+		<DisplayString Condition="HRESULT == -11">{"VK_ERROR_FORMAT_NOT_SUPPORTED"}</DisplayString>
+		<DisplayString Condition="HRESULT == -12">{"VK_ERROR_FRAGMENTED_POOL"}</DisplayString>
+		<DisplayString Condition="HRESULT == -13">{"VK_ERROR_UNKNOWN"}</DisplayString>
+		<DisplayString Condition="HRESULT == -1000000000">{"VK_ERROR_OUT_OF_POOL_MEMORY"}</DisplayString>
+		<DisplayString Condition="HRESULT == -1000000001">{"VK_ERROR_INVALID_EXTERNAL_HANDLE"}</DisplayString>
+		<DisplayString Condition="HRESULT == -1000000002">{"VK_ERROR_FRAGMENTATION"}</DisplayString>
+		<DisplayString Condition="HRESULT == -1000000003">{"VK_ERROR_INVALID_OPAQUE_CAPTURE_ADDRESS"}</DisplayString>
+		<!-- Add more VkResult values as needed -->
+		<DisplayString Condition="HRESULT != 0">{"Unknown VkResult"}</DisplayString>
+	</Type>
+
+</AutoVisualizer>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for QVariant -->
+	<Type Name="QVariant">
+		<DisplayString>{{type = {d.data->type}, value = {d.data->value}}}</DisplayString>
+		<Expand>
+			<Item Name="Type">d.data->type</Item>
+			<Item Name="Value">
+				<AlternativeCondition Type="int">d.data->value.i</AlternativeCondition>
+				<AlternativeCondition Type="double">d.data->value.d</AlternativeCondition>
+				<AlternativeCondition Type="QString">reinterpret_cast&lt;const wchar_t*&gt;(d.data->value.str)</AlternativeCondition>
+				<!-- Add more alternative conditions as necessary -->
+			</Item>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

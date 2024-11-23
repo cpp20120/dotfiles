@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for Optional -->
+	<Type Name="Optional&lt;*&gt;">
+		<DisplayString Condition="has_value">{"value = " + value}</DisplayString>
+		<DisplayString Condition="!has_value">{"(empty)"}</DisplayString>
+		<Expand>
+			<Item Name="Has Value">has_value</Item>
+			<Item Name="Value" Condition="has_value">value</Item>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

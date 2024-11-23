@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for QVector -->
+	<Type Name="QVector&lt;*&gt;">
+		<DisplayString>{{size = {d->size}}}</DisplayString>
+		<Expand>
+			<Item Name="Size">d->size</Item>
+			<ArrayItems>
+				<Size>d->size</Size>
+				<ValuePointer>d->begin</ValuePointer>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>

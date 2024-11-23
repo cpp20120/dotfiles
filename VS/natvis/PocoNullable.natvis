@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="Poco::Nullable&lt;*&gt;">
+    <DisplayString Condition="!isNull()">Value: {value()}</DisplayString>
+    <DisplayString Condition="isNull()">Null</DisplayString>
+    <Expand>
+      <Item Name="Value" Condition="!isNull()">value()</Item>
+    </Expand>
+  </Type>
+</AutoVisualizer>

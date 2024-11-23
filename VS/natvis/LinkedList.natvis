@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+	<!-- Custom Visualizer for Node -->
+	<Type Name="Node">
+		<DisplayString>{{value = {value}, next = {next}}}</DisplayString>
+		<Expand>
+			<Item Name="Value">value</Item>
+			<Item Name="Next">next</Item>
+		</Expand>
+	</Type>
+
+	<!-- Custom Visualizer for LinkedList -->
+	<Type Name="LinkedList">
+		<DisplayString>{{head = {head}}}</DisplayString>
+		<Expand>
+			<!-- Display the first node -->
+			<Item Name="Head">head</Item>
+			<!-- Display all nodes as a visualized array -->
+			<ArrayItems>
+				<Size>size()</Size>
+				<ValuePointer>head</ValuePointer>
+				<ValueNode>next</ValueNode>
+			</ArrayItems>
+		</Expand>
+	</Type>
+
+</AutoVisualizer>
