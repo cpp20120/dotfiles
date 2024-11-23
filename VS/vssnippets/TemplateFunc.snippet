@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <Title>Template Function</Title>
+      <Shortcut>tplfunc</Shortcut>
+      <Description>Snippet for creating a template function</Description>
+      <Author>cppshizoid</Author>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal>
+          <ID>FunctionName</ID>
+          <ToolTip>Function Name</ToolTip>
+          <Default>myFunction</Default>
+        </Literal>
+        <Literal>
+          <ID>TypeName</ID>
+          <ToolTip>Type Name</ToolTip>
+          <Default>T</Default>
+        </Literal>
+      </Declarations>
+      <Code Language="cpp">
+        <![CDATA[
+template<typename $TypeName$>
+void $FunctionName$($TypeName$ param) {
+    // Function implementation
+}
+        ]]>
+      </Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

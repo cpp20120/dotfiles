@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+    <CodeSnippet Format="1.0.0">
+        <Header>
+            <Title>PI Constant</Title>
+            <Shortcut>pi</Shortcut>
+            <Description>Snippet for the PI constant using std::numbers::pi in C++20</Description>
+            <Author>Alexander Krivoshchekov</Author>
+        </Header>
+        <Snippet>
+            <Declarations>
+                <Literal>
+                    <ID>namespace</ID>
+                    <ToolTip>Enter the namespace for the pi constant</ToolTip>
+                    <Default>std::numbers</Default>
+                </Literal>
+                <Literal>
+                    <ID>name</ID>
+                    <ToolTip>Enter the name for the constant</ToolTip>
+                    <Default>pi</Default>
+                </Literal>
+            </Declarations>
+            <Code Language="cpp">
+                <![CDATA[
+constexpr auto pi = $namespace$::$name$;
+]]>
+            </Code>
+        </Snippet>
+    </CodeSnippet>
+</CodeSnippets>
