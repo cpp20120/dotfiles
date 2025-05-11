@@ -1,10 +1,14 @@
 <#
 .SYNOPSIS
-    Показывает топ-5 процессов по потреблению ОЗУ с цветным выделением
+    Показывает топ-5 процессов по потреблению ОЗУ с цветным выделением и информацией об использовании памяти
 #>
 
+# Получаем данные о памяти
 $totalRAM = (Get-CimInstance Win32_ComputerSystem).TotalPhysicalMemory / 1MB
+$usedRAM = (Get-CimInstance Win32_OperatingSystem).TotalVisibleMemorySize - (Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory
+$usedRAM = $usedRAM / 1KB  # Конвертируем в MB
 
+# Получаем топ-5 процессов
 $topProcesses = Get-Process | 
 Sort-Object -Property WS -Descending | 
 Select-Object -First 5 |
@@ -21,14 +25,16 @@ ForEach-Object {
     }
 }
 
+# Выводим заголовок таблицы
 Write-Host ("{0,-8} {1,-18} {2,-12} {3,-12}" -f 'Id', 'ProcessName', 'Memory(MB)', '% of Total') -ForegroundColor Cyan
 Write-Host ("{0,-8} {1,-18} {2,-12} {3,-12}" -f '--', '-----------', '----------', '----------') -ForegroundColor DarkCyan
 
+# Выводим процессы с цветами
 foreach ($proc in $topProcesses) {
     $color = switch ($proc.Rank) {
-        0 { "Red" }   
-        1 { "Yellow" }
-        2 { "Green" }
+        0 { "Red" }     # 1 место
+        1 { "Yellow" }  # 2 место
+        2 { "Green" }   # 3 место
         default { "Gray" }
     }
     
@@ -39,4 +45,10 @@ foreach ($proc in $topProcesses) {
         $proc.'% of Total') -ForegroundColor $color
 }
 
-Write-Host "`nОбщий объем ОЗУ: $([math]::Round($totalRAM, 2)) MB" -ForegroundColor Cyan
+# Выводим информацию об использовании памяти
+$usagePercentage = [math]::Round(($usedRAM / $totalRAM) * 100, 2)
+$usageColor = if ($usagePercentage -gt 90) { "Red" }
+elseif ($usagePercentage -gt 70) { "Yellow" }
+else { "Green" }
+
+Write-Host "`nИспользование ОЗУ: $([math]::Round($usedRAM, 2)) MB / $([math]::Round($totalRAM, 2)) MB ($usagePercentage%)" -ForegroundColor $usageColor
